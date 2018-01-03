@@ -2,3 +2,7 @@ Anuj:
 
 1. This is the first thing i have learned
 2. This is the second thing i have learned
+
+Tanya:
+
+1. On the first day we learned about installation process of RVM.
