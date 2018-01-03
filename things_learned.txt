@@ -1,0 +1,7 @@
+Anuj:
+
+1. This is the first thing i have learned
+2. This is the second thing i have learned
+
+Priyanka:
+1. what is RVM : RVM is a command-line tool which allows you to easily install, manage, and work with multiple ruby environments from interpreters to sets of gems. 
