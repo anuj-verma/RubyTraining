@@ -9,4 +9,7 @@ Priyanka:
 
 Jyoti:
 1. I learned RVM yesterday
-e9ed074cc56e3e8e7c0bf393b2f3571f04d3fc71
+
+
+Akshay: 
+Login shell: A login shell is the first process that executes under out user ID when we log into the session. A login shell is full functional shell.
