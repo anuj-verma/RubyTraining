@@ -27,22 +27,34 @@ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB8
 command to create gemset:rvm gemset create nameofgemset
 command to use gemset :rvm gemset use nameofgemset
 command to delete gemset:rvm grmset delete nameofgemset
-Added by anuj
-
 
 Jyoti:
 1. I learned RVM yesterday
 Added by anuj
 
+Harish:
+1. I have learned RVM 
+	RVM commands     
+2. RVM installation
+3. Ruby installation 
+4. gem structure 
+5. About IRB
 
 Akshay: 
 Login shell: A login shell is the first process that executes under out user ID when we log into the session. A login shell is full functional shell.
-Added by anuj
+Login shell: A login shell is the first process that executes under out user ID when we log into the session. A login shell is full functional shell.
+1. Login shell: A login shell is the first process that executes under out user ID when we log into the session. A login shell is full functional shell.
+
+2.To create gemset we use : rvm gemset create <gemset name>
+
+3.In ruby we can use single line comments using "#" and multiline comments "=begin ... =end"
+
 
 Pinky:
 1.I learned how to install rvm command line tool in the bash shell.
 2.Then we learned about the GPG keys used while installation.
 3.We also learned about the login and non login shell.
 Added by anuj
- 
+4.We learned about the ruby gems and thier structure in detail
 
+ 
