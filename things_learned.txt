@@ -68,6 +68,7 @@ Login shell: A login shell is the first process that executes under out user ID 
 	some useful commands are :
 		git init
 		git add <filename>
+		git status
 		git commit -m "message"
 		git pull
 		git push origin <branch name>
