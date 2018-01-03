@@ -127,3 +127,4 @@ Raj:
 7. Basic git commands like init, config, status, add, diff, commit, checkout, reset, rm, push, -ignore, pull, clone
 Hi i am anuj, testing
 8. Resolving conflicts
+Hi i am anuj, testing
