@@ -8,6 +8,7 @@ Tanya:
 
 1. On the first day we learned about installation process of RVM.
 2. Then we learned about the installation of Ruby using RVM.
+3. We learned that ruby components can be only read using login shells, and hence we learned about more types of shell.
 
 
 Priyanka:
