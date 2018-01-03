@@ -5,3 +5,10 @@ Anuj:
 
 Jyoti:
 1. I learned RVM yesterday
+
+Ajay :
+The component of gem 
+1) lib : content the code for gem
+2)test or spec :content the tests.
+3)rake file : Content the intruction set
+4)Gemspec : Specifies the information like name,version,author,dependencies.
