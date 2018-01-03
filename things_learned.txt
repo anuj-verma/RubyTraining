@@ -43,6 +43,12 @@ Harish:
 Akshay: 
 Login shell: A login shell is the first process that executes under out user ID when we log into the session. A login shell is full functional shell.
 Login shell: A login shell is the first process that executes under out user ID when we log into the session. A login shell is full functional shell.
+1. Login shell: A login shell is the first process that executes under out user ID when we log into the session. A login shell is full functional shell.
+
+2.To create gemset we use : rvm gemset create <gemset name>
+
+3.In ruby we can use single line comments using "#" and multiline comments "=begin ... =end"
+
 
 Pinky:
 1.I learned how to install rvm command line tool in the bash shell.
