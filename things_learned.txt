@@ -14,6 +14,7 @@ Tanya:
 RUby gems have following componets:- Lib, bin, gemspec, Rakefile, test/spec, Readme.
 A collection of gems is called gemsets.
 Gemsets can be created using rvm gemset create <name> command.
+Added by anuj
 
 Priyanka:
 1. what is RVM : RVM is a command-line tool which allows you to easily install, manage, and work with multiple ruby environments from interpreters to sets of gems. 
@@ -26,12 +27,12 @@ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB8
 command to create gemset:rvm gemset create nameofgemset
 command to use gemset :rvm gemset use nameofgemset
 command to delete gemset:rvm grmset delete nameofgemset
-
-
+Added by anuj
 
 
 Jyoti:
 1. I learned RVM yesterday
+Added by anuj
 
 
 Akshay: 
@@ -40,10 +41,10 @@ Akshay:
 2.To create gemset we use : rvm gemset create <gemset name>
 
 3.In ruby we can use single line comments using "#" and multiline comments "=begin ... =end"
-
-
+Added by anuj
 
 Pinky:
 1.I learned how to install rvm command line tool in the bash shell.
 2.Then we learned about the GPG keys used while installation.
+Added by anuj
 
