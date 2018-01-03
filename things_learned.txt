@@ -106,3 +106,14 @@ Suraj:
         Gemsets are available in "/.rvm/gems/"   path.
           Thus I learned few basic things about gemsets.
 
+
+ // This is trial one...
+
+Raj:
+1. Gnu Privacy Guard
+2. Ruby Version Manager
+3. Login shell and non-login shell
+4. Gems and gemsets
+5. Interactive Ruby Shell
+6. Version control system
+7. Basic git commands like init, config, status, add, diff, commit, checkout, reset, rm, push, -ignore, pull, clone
