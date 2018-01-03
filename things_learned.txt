@@ -18,6 +18,11 @@ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB8
 \curl -sSL https://get.rvm.io | bash -s stable
 3.to install a ruby version type : rvm install rubyversionname in terminal
 4.gem is a library for ruby,inside gems following components are present 1.code 2.Documentation 3.gemspec
+5.gemset : set of gems
+command to create gemset:rvm gemset create nameofgemset
+command to use gemset :rvm gemset use nameofgemset
+command to delete gemset:rvm grmset delete nameofgemset
+
 
 
 
