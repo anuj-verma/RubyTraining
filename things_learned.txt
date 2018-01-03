@@ -3,12 +3,26 @@ Anuj:
 1. This is the first thing i have learned
 2. This is the second thing i have learned
 
+
+Tanya:
+
+1. On the first day we learned about installation process of RVM.
+2. Then we learned about the installation of Ruby using RVM.
+
+
+Priyanka:
+1. what is RVM : RVM is a command-line tool which allows you to easily install, manage, and work with multiple ruby environments from interpreters to sets of gems. 
+
 Jyoti:
 1. I learned RVM yesterday
-
 
 Harish:
 1. I have learned RVM 
 2. RVM installation
 3. gem structure
 4. About IRB
+
+Akshay: 
+Login shell: A login shell is the first process that executes under out user ID when we log into the session. A login shell is full functional shell.
+
+>>>>>>> c7f40824a83f3f98e5839729cf7e42196cd142ca
