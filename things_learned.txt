@@ -15,6 +15,7 @@ Tanya:
 RUby gems have following componets:- Lib, bin, gemspec, Rakefile, test/spec, Readme.
 A collection of gems is called gemsets.
 Gemsets can be created using rvm gemset create <name> command.
+Added by anuj
 
 
 Priyanka:
@@ -29,13 +30,13 @@ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB8
 command to create gemset:rvm gemset create nameofgemset
 command to use gemset :rvm gemset use nameofgemset
 command to delete gemset:rvm grmset delete nameofgemset
-
-
+Added by anuj
 
 
 
 Jyoti:
 1. I learned RVM yesterday
+Added by anuj
 
 
 
@@ -49,10 +50,12 @@ The component of gem
 
 Akshay: 
 Login shell: A login shell is the first process that executes under out user ID when we log into the session. A login shell is full functional shell.
+Added by anuj
 
 
 Pinky:
 1.I learned how to install rvm command line tool in the bash shell.
 2.Then we learned about the GPG keys used while installation.
+Added by anuj
 
 
