@@ -54,6 +54,8 @@ The component of gem
 
 
 Akshay: 
+Login shell: A login shell is the first process that executes under out user ID when we log into the session. A login shell is full functional shell.
+Login shell: A login shell is the first process that executes under out user ID when we log into the session. A login shell is full functional shell.
 1. Login shell: A login shell is the first process that executes under out user ID when we log into the session. A login shell is full functional shell.
 
 2. Non login shell: A non login shells is sarted by a program without a login. In this case the program just passes the name og the shell executable.
@@ -66,6 +68,7 @@ Akshay:
 	some useful commands are :
 		git init
 		git add <filename>
+		git status
 		git commit -m "message"
 		git pull
 		git push origin <branch name>
@@ -75,19 +78,15 @@ Akshay:
 Pinky:
 1.I learned how to install rvm command line tool in the bash shell.
 2.Then we learned about the GPG keys used while installation.
-
-
-
-Jyoti:
-2.I learned gem and gemset
-3.I Version control tool today
-
-
 3.We also learned about the login and non login shell.
 Added by anuj
 4.We learned about the ruby gems and their structure in detail.
-5.We learned about the version control system and out of them we learned about the git version control syytem.
+5.We learned about the version control system and out of them we learned about the git version control system.
 
+ 
+Jyoti:
+2.I learned gem and gemset
+3.I Version control tool today
 
 
 
@@ -115,7 +114,7 @@ Suraj:
                              rvm gemset use gemset_name
         Gemsets are available in "/.rvm/gems/"   path.
           Thus I learned few basic things about gemsets.
-
+ 
 
  // This is trial one...
 
@@ -128,3 +127,4 @@ Raj:
 6. Version control system
 7. Basic git commands like init, config, status, add, diff, commit, checkout, reset, rm, push, -ignore, pull, clone
 8. Resolving conflicts
+ 
