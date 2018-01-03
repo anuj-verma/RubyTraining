@@ -37,12 +37,13 @@ Jyoti:
 Added by anuj
 
 Harish:
-1. I have learned RVM 
-	RVM commands     
+1. I have learned RVM     
 2. RVM installation
 3. Ruby installation 
-4. gem structure 
-5. About IRB
+4. gem structure
+5. learned about gemsets used in ruby 
+6. About IRB
+7. installed faker gem
 
 
 Ajay :
@@ -54,8 +55,6 @@ The component of gem
 
 
 Akshay: 
-Login shell: A login shell is the first process that executes under out user ID when we log into the session. A login shell is full functional shell.
-Login shell: A login shell is the first process that executes under out user ID when we log into the session. A login shell is full functional shell.
 1. Login shell: A login shell is the first process that executes under out user ID when we log into the session. A login shell is full functional shell.
 
 2. Non login shell: A non login shells is sarted by a program without a login. In this case the program just passes the name og the shell executable.
@@ -114,6 +113,7 @@ Suraj:
                              rvm gemset use gemset_name
         Gemsets are available in "/.rvm/gems/"   path.
           Thus I learned few basic things about gemsets.
+ // This is trial one...
  
 
  // This is trial one...
