@@ -54,8 +54,6 @@ The component of gem
 
 
 Akshay: 
-Login shell: A login shell is the first process that executes under out user ID when we log into the session. A login shell is full functional shell.
-Login shell: A login shell is the first process that executes under out user ID when we log into the session. A login shell is full functional shell.
 1. Login shell: A login shell is the first process that executes under out user ID when we log into the session. A login shell is full functional shell.
 
 2. Non login shell: A non login shells is sarted by a program without a login. In this case the program just passes the name og the shell executable.
