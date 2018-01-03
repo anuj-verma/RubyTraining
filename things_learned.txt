@@ -41,8 +41,6 @@ Harish:
 5. About IRB
 
 Akshay: 
-Login shell: A login shell is the first process that executes under out user ID when we log into the session. A login shell is full functional shell.
-Login shell: A login shell is the first process that executes under out user ID when we log into the session. A login shell is full functional shell.
 1. Login shell: A login shell is the first process that executes under out user ID when we log into the session. A login shell is full functional shell.
 
 2.To create gemset we use : rvm gemset create <gemset name>
