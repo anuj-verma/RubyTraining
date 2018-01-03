@@ -10,11 +10,13 @@ Tanya:
 2. Then we learned about the installation of Ruby using RVM.
 3. We learned that ruby components can be only read using login shells, and hence we learned about more types of shell.
 4. Login shells first read and execute commands from /etc/profile whereas a non login shell reads and executes commands from etc/bash/bash.rc. Non log in shells will source your .bashrc but not you profile.
+
 5. All ruby Libraries are relesed in form of gems.
 RUby gems have following componets:- Lib, bin, gemspec, Rakefile, test/spec, Readme.
 A collection of gems is called gemsets.
 Gemsets can be created using rvm gemset create <name> command.
 Added by anuj
+
 
 Priyanka:
 1. what is RVM : RVM is a command-line tool which allows you to easily install, manage, and work with multiple ruby environments from interpreters to sets of gems. 
@@ -23,10 +25,12 @@ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB8
 \curl -sSL https://get.rvm.io | bash -s stable
 3.to install a ruby version type : rvm install rubyversionname in terminal
 4.gem is a library for ruby,inside gems following components are present 1.code 2.Documentation 3.gemspec
+
 5.gemset : set of gems
 command to create gemset:rvm gemset create nameofgemset
 command to use gemset :rvm gemset use nameofgemset
 command to delete gemset:rvm grmset delete nameofgemset
+
 
 Jyoti:
 1. I learned RVM yesterday
@@ -40,14 +44,32 @@ Harish:
 4. gem structure 
 5. About IRB
 
+
+Ajay :
+The component of gem 
+1) lib : content the code for gem
+2)test or spec :content the tests.
+3)rake file : Content the intruction set
+4)Gemspec : Specifies the information like name,version,author,dependencies.
+
+
 Akshay: 
 Login shell: A login shell is the first process that executes under out user ID when we log into the session. A login shell is full functional shell.
 Login shell: A login shell is the first process that executes under out user ID when we log into the session. A login shell is full functional shell.
 1. Login shell: A login shell is the first process that executes under out user ID when we log into the session. A login shell is full functional shell.
 
-2.To create gemset we use : rvm gemset create <gemset name>
+2. Non login shell: A non login shells is sarted by a program without a login. In this case the program just passes the name og the shell executable.
 
-3.In ruby we can use single line comments using "#" and multiline comments "=begin ... =end"
+3. To create gemset we use : rvm gemset create <gemset name>
+
+4. In ruby we can use single line comments using "#" and multiline comments "=begin ... =end"
+
+5. Git is version control system(VCS).
+	some useful commands are :
+		git init
+		git add <filename>
+		git pull
+
 
 
 Pinky:
@@ -58,6 +80,10 @@ Added by anuj
 4.We learned about the ruby gems and their structure in detail.
 5.We learned about the version control system and out of them we learned about the git version control system.
 
+ 
+Jyoti:
+2.I learned gem and gemset
+3.I Version control tool today
 
 
 
