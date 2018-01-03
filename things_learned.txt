@@ -43,9 +43,17 @@ Harish:
 Akshay: 
 1. Login shell: A login shell is the first process that executes under out user ID when we log into the session. A login shell is full functional shell.
 
-2.To create gemset we use : rvm gemset create <gemset name>
+2. Non login shell: A non login shells is sarted by a program without a login. In this case the program just passes the name og the shell executable.
 
-3.In ruby we can use single line comments using "#" and multiline comments "=begin ... =end"
+3. To create gemset we use : rvm gemset create <gemset name>
+
+4. In ruby we can use single line comments using "#" and multiline comments "=begin ... =end"
+
+5. Git is version control system(VCS).
+	some useful commands are :
+		git init
+		git add <filename>
+		git pull
 
 
 Pinky:
