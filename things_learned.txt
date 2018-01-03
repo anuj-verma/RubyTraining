@@ -31,4 +31,6 @@ Login shell: A login shell is the first process that executes under out user ID 
 Pinky:
 1.I learned how to install rvm command line tool in the bash shell.
 2.Then we learned about the GPG keys used while installation.
+3.We also learned about the login and non login shell.
+
 
