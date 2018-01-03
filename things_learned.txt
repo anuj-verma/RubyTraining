@@ -20,5 +20,6 @@ Akshay:
 Login shell: A login shell is the first process that executes under out user ID when we log into the session. A login shell is full functional shell.
 
 Pinky:
-1.I learned to how to install rvm command line tool in the bash shell.
+1.I learned how to install rvm command line tool in the bash shell.
+2.Then we learned about the GPG keys used while installation.
 
