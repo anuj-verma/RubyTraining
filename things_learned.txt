@@ -10,11 +10,13 @@ Tanya:
 2. Then we learned about the installation of Ruby using RVM.
 3. We learned that ruby components can be only read using login shells, and hence we learned about more types of shell.
 4. Login shells first read and execute commands from /etc/profile whereas a non login shell reads and executes commands from etc/bash/bash.rc. Non log in shells will source your .bashrc but not you profile.
+
 5. All ruby Libraries are relesed in form of gems.
 RUby gems have following componets:- Lib, bin, gemspec, Rakefile, test/spec, Readme.
 A collection of gems is called gemsets.
 Gemsets can be created using rvm gemset create <name> command.
 Added by anuj
+
 
 Priyanka:
 1. what is RVM : RVM is a command-line tool which allows you to easily install, manage, and work with multiple ruby environments from interpreters to sets of gems. 
@@ -23,10 +25,12 @@ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB8
 \curl -sSL https://get.rvm.io | bash -s stable
 3.to install a ruby version type : rvm install rubyversionname in terminal
 4.gem is a library for ruby,inside gems following components are present 1.code 2.Documentation 3.gemspec
+
 5.gemset : set of gems
 command to create gemset:rvm gemset create nameofgemset
 command to use gemset :rvm gemset use nameofgemset
 command to delete gemset:rvm grmset delete nameofgemset
+
 
 Jyoti:
 1. I learned RVM yesterday
@@ -39,6 +43,15 @@ Harish:
 3. Ruby installation 
 4. gem structure 
 5. About IRB
+
+
+Ajay :
+The component of gem 
+1) lib : content the code for gem
+2)test or spec :content the tests.
+3)rake file : Content the intruction set
+4)Gemspec : Specifies the information like name,version,author,dependencies.
+
 
 Akshay: 
 1. Login shell: A login shell is the first process that executes under out user ID when we log into the session. A login shell is full functional shell.
@@ -56,12 +69,23 @@ Akshay:
 		git pull
 
 
+
 Pinky:
 1.I learned how to install rvm command line tool in the bash shell.
 2.Then we learned about the GPG keys used while installation.
+
+
+
+Jyoti:
+2.I learned gem and gemset
+3.I Version control tool today
+
+
 3.We also learned about the login and non login shell.
 Added by anuj
-4.We learned about the ruby gems and thier structure in detail.
+4.We learned about the ruby gems and their structure in detail.
+5.We learned about the version control system and out of them we learned about the git version control syytem.
+
 
 
 
@@ -89,4 +113,15 @@ Suraj:
                              rvm gemset use gemset_name
         Gemsets are available in "/.rvm/gems/"   path.
           Thus I learned few basic things about gemsets.
- 
+
+
+ // This is trial one...
+
+Raj:
+1. Gnu Privacy Guard
+2. Ruby Version Manager
+3. Login shell and non-login shell
+4. Gems and gemsets
+5. Interactive Ruby Shell
+6. Version control system
+7. Basic git commands like init, config, status, add, diff, commit, checkout, reset, rm, push, -ignore, pull, clone
