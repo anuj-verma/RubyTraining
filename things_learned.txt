@@ -30,14 +30,19 @@ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB8
 command to create gemset:rvm gemset create nameofgemset
 command to use gemset :rvm gemset use nameofgemset
 command to delete gemset:rvm grmset delete nameofgemset
-Added by anuj
-
 
 
 Jyoti:
 1. I learned RVM yesterday
 Added by anuj
 
+Harish:
+1. I have learned RVM 
+	RVM commands     
+2. RVM installation
+3. Ruby installation 
+4. gem structure 
+5. About IRB
 
 
 Ajay :
@@ -49,13 +54,47 @@ The component of gem
 
 
 Akshay: 
-Login shell: A login shell is the first process that executes under out user ID when we log into the session. A login shell is full functional shell.
-Added by anuj
+1. Login shell: A login shell is the first process that executes under out user ID when we log into the session. A login shell is full functional shell.
+
+2.To create gemset we use : rvm gemset create <gemset name>
+
+3.In ruby we can use single line comments using "#" and multiline comments "=begin ... =end"
+
 
 
 Pinky:
 1.I learned how to install rvm command line tool in the bash shell.
 2.Then we learned about the GPG keys used while installation.
+3.We also learned about the login and non login shell.
 Added by anuj
+4.We learned about the ruby gems and their structure in detail.
+5.We learned about the version control system and out of them we learned about the git version control syytem.
 
+
+
+
+Suraj:
+    
+ 1. I learned concept of gemsets used in Ruby. Gemsets are basically the set of related gems kept together. These gems are nothing but the supportive codes that help a bigger project to run. Thus, we can manually create our own gemsets, use them, delete them. I learned some command used with gemsets.. These are as follows.
+
+   *** To create a new gemset:
+                            
+                              rvm gemset create gemset_name
+
+  *** To delete a gemset:
+                             rvm gemset delete gemset_name
+
+        There are 2 built-in gemsets:
+                     1) default
+                     2) global
+
+   *** To list existing gemsets:
+ 
+                              rvm gemset list
+
+   *** To use specific gemset:
+            
+                             rvm gemset use gemset_name
+        Gemsets are available in "/.rvm/gems/"   path.
+          Thus I learned few basic things about gemsets.
 
