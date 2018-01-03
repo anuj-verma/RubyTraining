@@ -14,6 +14,7 @@ Tanya:
 RUby gems have following componets:- Lib, bin, gemspec, Rakefile, test/spec, Readme.
 A collection of gems is called gemsets.
 Gemsets can be created using rvm gemset create <name> command.
+Added by anuj
 
 Priyanka:
 1. what is RVM : RVM is a command-line tool which allows you to easily install, manage, and work with multiple ruby environments from interpreters to sets of gems. 
@@ -29,9 +30,11 @@ command to delete gemset:rvm grmset delete nameofgemset
 
 Jyoti:
 1. I learned RVM yesterday
+Added by anuj
 
 Harish:
-1. I have learned RVM   
+1. I have learned RVM 
+	RVM commands     
 2. RVM installation
 3. Ruby installation 
 4. gem structure 
