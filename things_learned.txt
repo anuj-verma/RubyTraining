@@ -125,3 +125,4 @@ Raj:
 5. Interactive Ruby Shell
 6. Version control system
 7. Basic git commands like init, config, status, add, diff, commit, checkout, reset, rm, push, -ignore, pull, clone
+8. Resolving conflicts
