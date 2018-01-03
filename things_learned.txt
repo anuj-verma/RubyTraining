@@ -33,12 +33,13 @@ Jyoti:
 Added by anuj
 
 Harish:
-1. I have learned RVM 
-	RVM commands     
+1. I have learned RVM     
 2. RVM installation
 3. Ruby installation 
-4. gem structure 
-5. About IRB
+4. gem structure
+5. learned about gemsets used in ruby 
+6. About IRB
+7. installed faker gem
 
 Akshay: 
 Login shell: A login shell is the first process that executes under out user ID when we log into the session. A login shell is full functional shell.
