@@ -10,6 +10,10 @@ Tanya:
 2. Then we learned about the installation of Ruby using RVM.
 3. We learned that ruby components can be only read using login shells, and hence we learned about more types of shell.
 4. Login shells first read and execute commands from /etc/profile whereas a non login shell reads and executes commands from etc/bash/bash.rc. Non log in shells will source your .bashrc but not you profile.
+5. All ruby Libraries are relesed in form of gems.
+RUby gems have following componets:- Lib, bin, gemspec, Rakefile, test/spec, Readme.
+A collection of gems is called gemsets.
+Gemsets can be created using rvm gemset create <name> command.
 Added by anuj
 
 Priyanka:
@@ -19,8 +23,11 @@ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB8
 \curl -sSL https://get.rvm.io | bash -s stable
 3.to install a ruby version type : rvm install rubyversionname in terminal
 4.gem is a library for ruby,inside gems following components are present 1.code 2.Documentation 3.gemspec
+5.gemset : set of gems
+command to create gemset:rvm gemset create nameofgemset
+command to use gemset :rvm gemset use nameofgemset
+command to delete gemset:rvm grmset delete nameofgemset
 Added by anuj
-
 
 
 Jyoti:
