@@ -128,3 +128,5 @@ Raj:
 7. Basic git commands like init, config, status, add, diff, commit, checkout, reset, rm, push, -ignore, pull, clone
 8. Resolving conflicts
  
+Suraj:
+      This is change made by Suraj. 
