@@ -66,6 +66,7 @@ Akshay:
 	some useful commands are :
 		git init
 		git add <filename>
+		git status
 		git commit -m "message"
 		git pull
 		git push origin <branch name>
