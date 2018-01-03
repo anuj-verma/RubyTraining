@@ -7,6 +7,7 @@ Anuj:
 Tanya:
 
 1. On the first day we learned about installation process of RVM.
+2. Then we learned about the installation of Ruby using RVM.
 
 
 Priyanka:
