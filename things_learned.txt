@@ -85,7 +85,8 @@ Added by anuj
  
 Jyoti:
 2.I learned gem and gemset
-3.I Version control tool today
+.I Version control tool today
+this is new
 
 
 
