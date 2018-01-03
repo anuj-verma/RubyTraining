@@ -15,6 +15,8 @@ Tanya:
 RUby gems have following componets:- Lib, bin, gemspec, Rakefile, test/spec, Readme.
 A collection of gems is called gemsets.
 Gemsets can be created using rvm gemset create <name> command.
+
+**this is to show switching between branches.
 Added by anuj
 
 
