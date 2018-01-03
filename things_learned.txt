@@ -5,3 +5,10 @@ Anuj:
 
 Jyoti:
 1. I learned RVM yesterday
+
+
+Harish:
+1. I have learned RVM 
+2. RVM installation
+3. gem structure
+4. 
