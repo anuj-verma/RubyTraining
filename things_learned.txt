@@ -44,7 +44,7 @@ Harish:
 5. learned about gemsets used in ruby 
 6. About IRB
 7. installed faker gem
-
+hhhh
 
 Ajay :
 The component of gem 
