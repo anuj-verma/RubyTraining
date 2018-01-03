@@ -8,15 +8,23 @@ Tanya:
 
 1. On the first day we learned about installation process of RVM.
 2. Then we learned about the installation of Ruby using RVM.
-
+3. We learned that ruby components can be only read using login shells, and hence we learned about more types of shell.
+4. Login shells first read and execute commands from /etc/profile whereas a non login shell reads and executes commands from etc/bash/bash.rc. Non log in shells will source your .bashrc but not you profile.
 
 Priyanka:
 1. what is RVM : RVM is a command-line tool which allows you to easily install, manage, and work with multiple ruby environments from interpreters to sets of gems. 
+2 How to install RVM :
+gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+\curl -sSL https://get.rvm.io | bash -s stable
+3.to install a ruby version type : rvm install rubyversionname in terminal
+4.gem is a library for ruby,inside gems following components are present 1.code 2.Documentation 3.gemspec
+
+
 
 Jyoti:
 1. I learned RVM yesterday
 
-<<<<<<< HEAD
+
 
 Ajay :
 The component of gem 
@@ -24,9 +32,9 @@ The component of gem
 2)test or spec :content the tests.
 3)rake file : Content the intruction set
 4)Gemspec : Specifies the information like name,version,author,dependencies.
-=======
+
 
 Akshay: 
 Login shell: A login shell is the first process that executes under out user ID when we log into the session. A login shell is full functional shell.
 
->>>>>>> c7f40824a83f3f98e5839729cf7e42196cd142ca
+
