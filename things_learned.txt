@@ -52,7 +52,7 @@ The component of gem
 2)test or spec :content the tests.
 3)rake file : Content the intruction set
 4)Gemspec : Specifies the information like name,version,author,dependencies.
-
+5)branch
 
 Akshay: 
 1. Login shell: A login shell is the first process that executes under out user ID when we log into the session. A login shell is full functional shell.
