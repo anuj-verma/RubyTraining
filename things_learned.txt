@@ -68,7 +68,9 @@ Login shell: A login shell is the first process that executes under out user ID 
 	some useful commands are :
 		git init
 		git add <filename>
+		git commit -m "message"
 		git pull
+		git push origin <branch name>
 
 
 
@@ -111,4 +113,17 @@ Suraj:
                              rvm gemset use gemset_name
         Gemsets are available in "/.rvm/gems/"   path.
           Thus I learned few basic things about gemsets.
+ 
+
+ // This is trial one...
+
+Raj:
+1. Gnu Privacy Guard
+2. Ruby Version Manager
+3. Login shell and non-login shell
+4. Gems and gemsets
+5. Interactive Ruby Shell
+6. Version control system
+7. Basic git commands like init, config, status, add, diff, commit, checkout, reset, rm, push, -ignore, pull, clone
+8. Resolving conflicts
  
