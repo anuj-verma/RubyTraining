@@ -1,9 +1,11 @@
-Anuj:
+New day starting
+
 
 1. This is the first thing i have learned
 2. This is the second thing i have learned
 
 
+Anuj:
 Tanya:
 
 1. On the first day we learned about installation process of RVM.
@@ -13,41 +15,26 @@ Tanya:
 
 5. All ruby Libraries are relesed in form of gems.
 RUby gems have following componets:- Lib, bin, gemspec, Rakefile, test/spec, Readme.
-A collection of gems is called gemsets.
-Gemsets can be created using rvm gemset create <name> command.
+A collection of gems is called gems.
+Gemsets can be created using rvm gem create <name> command.
 Added by anuj
 
 
 Priyanka:
-1. what is RVM : RVM is a command-line tool which allows you to easily install, manage, and work with multiple ruby environments from interpreters to sets of gems. 
-2 How to install RVM :
-gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+1. what is RVM : RVM is a command-line tool which allows you to easily install, manage, and work with multiple ruby environments from interpreters to sets of gems.  2 How to install RVM : gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
 \curl -sSL https://get.rvm.io | bash -s stable
 3.to install a ruby version type : rvm install rubyversionname in terminal
 4.gem is a library for ruby,inside gems following components are present 1.code 2.Documentation 3.gemspec
 
-5.gemset : set of gems
-command to create gemset:rvm gemset create nameofgemset
-command to use gemset :rvm gemset use nameofgemset
-command to delete gemset:rvm grmset delete nameofgemset
+5.gem : set of gems
+command to create gem:rvm gemset create nameofgemset
+command to use gem :rvm gemset use nameofgemset
+command to delete gem:rvm grmset delete nameofgemset
 
 
 Jyoti:
 1. I learned RVM yesterday
-Added by anuj
 
-Harish:
-1. I have learned RVM     
-2. RVM installation
-3. Ruby installation 
-4. gem structure
-5. learned about gemsets used in ruby 
-6. About IRB
-7. installed faker gem
-
-
-Ajay :
-The component of gem 
 1) lib : content the code for gem
 2)test or spec :content the tests.
 3)rake file : Content the intruction set
@@ -59,7 +46,7 @@ Akshay:
 
 2. Non login shell: A non login shells is sarted by a program without a login. In this case the program just passes the name og the shell executable.
 
-3. To create gemset we use : rvm gemset create <gemset name>
+3. To create gem we use : rvm gemset create <gemset name>
 
 4. In ruby we can use single line comments using "#" and multiline comments "=begin ... =end"
 
@@ -84,35 +71,35 @@ Added by anuj
 
  
 Jyoti:
-2.I learned gem and gemset
+2.I learned gem and gem
 3.I Version control tool today
 
 
 
 Suraj:
     
- 1. I learned concept of gemsets used in Ruby. Gemsets are basically the set of related gems kept together. These gems are nothing but the supportive codes that help a bigger project to run. Thus, we can manually create our own gemsets, use them, delete them. I learned some command used with gemsets.. These are as follows.
+ 1. I learned concept of gems used in Ruby. Gemsets are basically the set of related gems kept together. These gems are nothing but the supportive codes that help a bigger project to run. Thus, we can manually create our own gemsets, use them, delete them. I learned some command used with gemsets.. These are as follows.
 
-   *** To create a new gemset:
+   *** To create a new gem:
                             
-                              rvm gemset create gemset_name
+                              rvm gem create gemset_name
 
-  *** To delete a gemset:
-                             rvm gemset delete gemset_name
+  *** To delete a gem:
+                             rvm gem delete gemset_name
 
-        There are 2 built-in gemsets:
+        There are 2 built-in gems:
                      1) default
                      2) global
 
-   *** To list existing gemsets:
+   *** To list existing gems:
  
-                              rvm gemset list
+                              rvm gem list
 
-   *** To use specific gemset:
+   *** To use specific gem:
             
-                             rvm gemset use gemset_name
+                             rvm gem use gemset_name
         Gemsets are available in "/.rvm/gems/"   path.
-          Thus I learned few basic things about gemsets.
+          Thus I learned few basic things about gems.
  // This is trial one...
  
 
@@ -122,11 +109,42 @@ Raj:
 1. Gnu Privacy Guard
 2. Ruby Version Manager
 3. Login shell and non-login shell
-4. Gems and gemsets
+4. Gems and gems
+
 5. Interactive Ruby Shell
+
 6. Version control system
 7. Basic git commands like init, config, status, add, diff, commit, checkout, reset, rm, push, -ignore, pull, clone
+
 8. Resolving conflicts
 
 Jyoti:
 Hi how r u???
+what are doing
+
+Added by anuj
+Added by anuj
+
+Harish:
+1. I have learned RVM     
+2. RVM installation
+3. Ruby installation 
+4. gem structure
+5. learned 
+6. About IRB
+7. installed faker gem
+
+
+Ajay :
+
+Harish:
+1. I have learned RVM     
+2. RVM installation
+3. Ruby installation 
+4. gem structure
+5. learned about gems used in ruby 
+6. About IRB
+7. installed faker gem
+
+
+Ajay :
