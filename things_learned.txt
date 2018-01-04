@@ -37,12 +37,13 @@ Jyoti:
 Added by anuj
 
 Harish:
-1. I have learned RVM 
-	RVM commands     
+1. I have learned RVM     
 2. RVM installation
 3. Ruby installation 
-4. gem structure 
-5. About IRB
+4. gem structure
+5. learned about gemsets used in ruby 
+6. About IRB
+7. installed faker gem
 
 
 Ajay :
@@ -112,6 +113,7 @@ Suraj:
                              rvm gemset use gemset_name
         Gemsets are available in "/.rvm/gems/"   path.
           Thus I learned few basic things about gemsets.
+ // This is trial one...
  
 
  // This is trial one...
@@ -125,4 +127,10 @@ Raj:
 6. Version control system
 7. Basic git commands like init, config, status, add, diff, commit, checkout, reset, rm, push, -ignore, pull, clone
 8. Resolving conflicts
- 
+
+Jyoti:
+Hi how r u???
+
+Suraj:
+    
+      This is morning commit just for practice...
