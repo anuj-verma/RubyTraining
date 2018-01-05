@@ -7,7 +7,11 @@ Anuj:
 
 >>>>>>> be7d8272d0bd86de6f171e7cf4cbc272086107c9
 
+<<<<<<< HEAD
 >>>>>>> 24832ab552b4fcd46952b5ab3544f84b3d6eeb27
+=======
+>>>>>>> 77c5fc48de2eda9f2c995f201347e8ec943f686b
+>>>>>>> master
 
 I am changing the first line.
 
@@ -159,6 +163,9 @@ Hi how r u???
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
 Changes made
 =======
 <<<<<<< HEAD
@@ -170,6 +177,10 @@ Suraj:
       This is morning commit just for practice...
 >>>>>>> 8ef8c53f9810ee28514d66c92e5faca498bf721d
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 24832ab552b4fcd46952b5ab3544f84b3d6eeb27
 =======
 >>>>>>> be7d8272d0bd86de6f171e7cf4cbc272086107c9
+=======
+>>>>>>> 77c5fc48de2eda9f2c995f201347e8ec943f686b
+>>>>>>> master
