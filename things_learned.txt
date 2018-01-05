@@ -1,9 +1,15 @@
 Anuj:
 
+
 1. This is THE first thing i have learned
 2. This is THE second thing i have learned
 
+ This is sample change
+2. This is the second thing i have learned
 
+
+1. This is the first thing i have learned
+Hello This is target change..
 Tanya:
 
 1. On THE first day we learned about installation process of RVM.
@@ -130,3 +136,7 @@ Raj:
 
 Jyoti:
 Hi how r u???
+
+Suraj:
+    
+      This is morning commit just for practice...
