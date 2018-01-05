@@ -1,3 +1,4 @@
+
 New day starting
 
 
@@ -5,7 +6,15 @@ New day starting
 2. This is the second thing i have learned
 
 
+
+
 Anuj:
+ This is sample change
+2. This is the second thing i have learned
+
+1. This is the first thing i have learned
+Hello This is target change..
+
 Tanya:
 
 1. On the first day we learned about installation process of RVM.
@@ -120,6 +129,7 @@ Raj:
 
 Jyoti:
 Hi how r u???
+
 what are doing
 
 Added by anuj
@@ -149,3 +159,9 @@ Harish:
 
 Ajay :
 change default
+
+
+Suraj:
+    
+      This is morning commit just for practice...
+
