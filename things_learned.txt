@@ -1,9 +1,8 @@
 Anuj:
-
 1. This is the first thing i have learned
 2. This is the second thing i have learned
 
-
+Hello This is target change..
 Tanya:
 
 1. On the first day we learned about installation process of RVM.
@@ -11,15 +10,15 @@ Tanya:
 3. We learned that ruby components can be only read using login shells, and hence we learned about more types of shell.
 4. Login shells first read and execute commands from /etc/profile whereas a non login shell reads and executes commands from etc/bash/bash.rc. Non log in shells will source your .bashrc but not you profile.
 
-5. All ruby Libraries are relesed in form of gems.
-RUby gems have following componets:- Lib, bin, gemspec, Rakefile, test/spec, Readme.
-A collection of gems is called gemsets.
-Gemsets can be created using rvm gemset create <name> command.
+5. All ruby Libraries are relesed in form of gemsets.
+RUby gemsets have following componets:- Lib, bin, gemspec, Rakefile, test/spec, Readme.
+A collection of gemsets is called gemsets.
+Gemsets can be created using rvm gemsetset create <name> command.
 Added by anuj
 
 
 Priyanka:
-1. what is RVM : RVM is a command-line tool which allows you to easily install, manage, and work with multiple ruby environments from interpreters to sets of gems. 
+1. what is RVM : RVM is a command-line tool which allows you to easily install, manage, and work with multiple ruby environments from interpreters to sets of gemsets. 
 2 How to install RVM :
 gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
 \curl -sSL https://get.rvm.io | bash -s stable
@@ -32,6 +31,10 @@ command to use gemset :rvm gemset use nameofgemset
 command to delete gemset:rvm grmset delete nameofgemset
 6.working of git
 
+5.gemsetset : set of gems
+command to create gemsetset:rvm gemset create nameofgemset
+command to use gemsetset :rvm gemset use nameofgemset
+command to delete gemsetset:rvm grmset delete nameofgemset
 
 Jyoti:
 1. I learned RVM yesterday
@@ -41,15 +44,15 @@ Harish:
 1. I have learned RVM     
 2. RVM installation
 3. Ruby installation 
-4. gem structure
-5. learned about gemsets used in ruby 
+4. gemset structure
+5. learned about gemsetsets used in ruby 
 6. About IRB
-7. installed faker gem
+7. installed faker gemsetset
 
 
 Ajay :
-The component of gem 
-1) lib : content the code for gem
+The component of gemset 
+1) lib : content the code for gemset
 2)test or spec :content the tests.
 3)rake file : Content the intruction set
 4)Gemspec : Specifies the information like name,version,author,dependencies.
@@ -60,7 +63,7 @@ Akshay:
 
 2. Non login shell: A non login shells is sarted by a program without a login. In this case the program just passes the name og the shell executable.
 
-3. To create gemset we use : rvm gemset create <gemset name>
+3. To create gemsetset we use : rvm gemset create <gemset name>
 
 4. In ruby we can use single line comments using "#" and multiline comments "=begin ... =end"
 
@@ -80,40 +83,41 @@ Pinky:
 2.Then we learned about the GPG keys used while installation.
 3.We also learned about the login and non login shell.
 Added by anuj
-4.We learned about the ruby gems and their structure in detail.
+4.We learned about the ruby gemsets and their structure in detail.
 5.We learned about the version control system and out of them we learned about the git version control system.
 
  
 Jyoti:
-2.I learned gem and gemset
+2.I learned gemset and gemset
 3.I Version control tool today
 
 
 
 Suraj:
     
- 1. I learned concept of gemsets used in Ruby. Gemsets are basically the set of related gems kept together. These gems are nothing but the supportive codes that help a bigger project to run. Thus, we can manually create our own gemsets, use them, delete them. I learned some command used with gemsets.. These are as follows.
+ 1. I learned concept of gemsetsets used in Ruby. Gemsets are basically the set of related gems kept together. These gems are nothing but the supportive codes that help a bigger project to run. Thus, we can manually create our own gemsets, use them, delete them. I learned some command used with gemsets.. These are as follows.
 
-   *** To create a new gemset:
+   *** To create a new gemsetset:
                             
-                              rvm gemset create gemset_name
+                              rvm gemsetset create gemset_name
+4. Login shells first read and execute commands from /etc/profile whereas a non login shell reads and executes commands from etc/bash/bash.rc. Non log in shells will source your .bashrc but not you profile.
 
-  *** To delete a gemset:
-                             rvm gemset delete gemset_name
+  *** To delete a gemsetset:
+                             rvm gemsetset delete gemset_name
 
-        There are 2 built-in gemsets:
+        There are 2 built-in gemsetsets:
                      1) default
                      2) global
 
-   *** To list existing gemsets:
+   *** To list existing gemsetsets:
  
-                              rvm gemset list
+                              rvm gemsetset list
 
-   *** To use specific gemset:
+   *** To use specific gemsetset:
             
-                             rvm gemset use gemset_name
-        Gemsets are available in "/.rvm/gems/"   path.
-          Thus I learned few basic things about gemsets.
+                             rvm gemsetset use gemset_name
+        Gemsets are available in "/.rvm/gemsets/"   path.
+          Thus I learned few basic things about gemsetsets.
  // This is trial one...
  
 
@@ -123,9 +127,16 @@ Raj:
 1. Gnu Privacy Guard
 2. Ruby Version Manager
 3. Login shell and non-login shell
-4. Gems and gemsets
+4. Gems and gemsetsets
+
 5. Interactive Ruby Shell
 6. Version control system
 7. Basic git commands like init, config, status, add, diff, commit, checkout, reset, rm, push, -ignore, pull, clone
 8. Resolving conflicts
- 
+
+Jyoti:
+Hi how r u???
+
+Suraj:
+    
+      This is morning commit just for practice...
