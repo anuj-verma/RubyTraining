@@ -1,7 +1,21 @@
+<<<<<<< HEAD
+=======
 Anuj:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
 
+>>>>>>> be7d8272d0bd86de6f171e7cf4cbc272086107c9
 
+<<<<<<< HEAD
+>>>>>>> 24832ab552b4fcd46952b5ab3544f84b3d6eeb27
+=======
+>>>>>>> 77c5fc48de2eda9f2c995f201347e8ec943f686b
+>>>>>>> master
+
+I am changing the first line.
+
+Anuj:
 1. This is the first thing i have learned
 2. This is the second thing i have learned
 
@@ -9,11 +23,17 @@ Anuj:
 =======
  This is sample change
 2. This is the second thing i have learned
+<<<<<<< HEAD
+=======
 
 1. This is the first thing i have learned
 Hello This is target change..
 Tanya:
+>>>>>>> be7d8272d0bd86de6f171e7cf4cbc272086107c9
 
+1. This is the first thing i have learned
+Hello This is target change..
+Tanya:
 1. On the first day we learned about installation process of RVM.
 2. Then we learned about the installation of Ruby using RVM.
 3. We learned that ruby components can be only read using login shells, and hence we learned about more types of shell.
@@ -142,8 +162,25 @@ Jyoti:
 Hi how r u???
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
+Changes made
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> be7d8272d0bd86de6f171e7cf4cbc272086107c9
 =======
 Suraj:
     
       This is morning commit just for practice...
 >>>>>>> 8ef8c53f9810ee28514d66c92e5faca498bf721d
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 24832ab552b4fcd46952b5ab3544f84b3d6eeb27
+=======
+>>>>>>> be7d8272d0bd86de6f171e7cf4cbc272086107c9
+=======
+>>>>>>> 77c5fc48de2eda9f2c995f201347e8ec943f686b
+>>>>>>> master
