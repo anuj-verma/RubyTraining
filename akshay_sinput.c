@@ -16,6 +16,7 @@ int main()
     name = realloc(name,len+1);
     *(name+len)=c;
     *(name+len+1)='\0';
+    printf("%d%s",len,name);
   }
   printf("%d%s",len,name);
   free(name);
