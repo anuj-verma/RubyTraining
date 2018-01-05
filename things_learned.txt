@@ -2,6 +2,10 @@
 =======
 Anuj:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> be7d8272d0bd86de6f171e7cf4cbc272086107c9
 
 >>>>>>> 24832ab552b4fcd46952b5ab3544f84b3d6eeb27
 
@@ -15,6 +19,13 @@ Anuj:
 =======
  This is sample change
 2. This is the second thing i have learned
+<<<<<<< HEAD
+=======
+
+1. This is the first thing i have learned
+Hello This is target change..
+Tanya:
+>>>>>>> be7d8272d0bd86de6f171e7cf4cbc272086107c9
 
 1. This is the first thing i have learned
 Hello This is target change..
@@ -147,12 +158,18 @@ Jyoti:
 Hi how r u???
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Changes made
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> be7d8272d0bd86de6f171e7cf4cbc272086107c9
 =======
 Suraj:
     
       This is morning commit just for practice...
 >>>>>>> 8ef8c53f9810ee28514d66c92e5faca498bf721d
+<<<<<<< HEAD
 >>>>>>> 24832ab552b4fcd46952b5ab3544f84b3d6eeb27
+=======
+>>>>>>> be7d8272d0bd86de6f171e7cf4cbc272086107c9
