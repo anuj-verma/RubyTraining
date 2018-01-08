@@ -1,0 +1,4 @@
+Variables
+max_marks = 15
+Variables should start small case or underscore and cannot be start with numbers and some special characters.
+Variables should be named meanifull name.
