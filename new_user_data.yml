@@ -1,0 +1,9 @@
+---
+:aki:
+  :name: akshay
+  :email: akshay@mail.com
+  :balance: 442
+  :password: aki
+  :transaction_history:
+  - User deposited 500 on 2018-01-08 18:02:57 +0530
+  - User withdrawn 58 on 2018-01-08 18:07:17 +0530
