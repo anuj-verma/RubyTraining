@@ -23,9 +23,9 @@ def enter_valid_passwd(statement)
 end
 
 def enter_valid_user_id(user_record, statement)
-	user_id = input(statement)
+  user_id = input(statement)
   if user_id.length != 0
-	  if user_record.has_key? (user_id.to_sym)
+    if user_record.has_key? (user_id.to_sym)
       print 'Conflict: UserId already exist'
       enter_valid_user_id(user_record, statement)
     else
