@@ -2,19 +2,18 @@
 
 #TODO:
 	#BUG: enetering non-numeric data where numeric input is expected doesn't raise an error
-	#Deal with negative numbers
+	#transaction not stored for the receiver
 
-#'transaction history' feature is remaining 
-
+require "time"
 #each user is stored as a hash e.g. #user = {balance: 765, password: "asda"}
 #every such user hashes are stored in a hash called users_list
 users_list = {}					#no user exists in the beginning
-transactions_all = {}
 
 #HOW TRANSACTIONS ARE STORED
 	#transactions_all = {user_id1: [{}, {}, {}], user_id1: [{}, {}, {}]}
 	#transactions_user = [{}, {}, {}]
-	#transaction = {type: 'deposit', amount: 100, transfer_user_id = 2, balance: 1000}
+	#transaction = {type: 'deposit', amount: 100, transfer_user_id = 2, balance: 1000, time: Time.now}
+transactions_all = {}
 
 #made global to conveniently check if a user is logged in or not
 $logged_in_user_id = false		#false if user not logged in
@@ -32,7 +31,7 @@ def register(users_list, transactions_all, password)
 	transactions_all[new_user_id] = []
 
 	$logged_in_user_id = new_user_id
-	puts "Your ID is #{$logged_in_user_id}. \nUser #{$logged_in_user_id} is registered and logged in."
+	puts "Registration successful. Your ID is #{$logged_in_user_id}."
 
 	new_user_id
 end
@@ -72,18 +71,26 @@ def login_caller(users_list, transactions_all, user_id)
 	end
 end
 
+def input_amount
+	puts 'Enter amount: '
+	while true
+		amount = gets.to_i
+		return amount if amount > 0
+		puts "Negaive amount cannot be entered."
+	end
+end
+
 
 def deposit(users_list, transactions_all, amount)
 	users_list[$logged_in_user_id][:balance] += amount
 
-	new_tranasction = {type: "Deposit", amount: amount, balance: users_list[$logged_in_user_id][:balance]}
+	new_tranasction = {type: "Deposit", amount: amount, balance: users_list[$logged_in_user_id][:balance], transaction_time: Time.now}
 	transactions_all[$logged_in_user_id].append(new_tranasction)
 end
 
 def deposit_caller(users_list, transactions_all)
-	system "clear"
-	puts 'Enter amount to be deposited: '			
-	deposit(users_list, transactions_all, gets.to_i)
+	system "clear"		
+	deposit(users_list, transactions_all, input_amount)
 	puts 'Deposit successful.'	
 end
 
@@ -92,7 +99,7 @@ def withdraw(users_list, transactions_all, amount)
 	if users_list[$logged_in_user_id][:balance] >= amount
 		users_list[$logged_in_user_id][:balance] -= amount
 
-		new_tranasction = {type: "Withdraw", amount: amount, balance: users_list[$logged_in_user_id][:balance]}
+		new_tranasction = {type: "Withdraw", amount: amount, balance: users_list[$logged_in_user_id][:balance], transaction_time: Time.now}
 		transactions_all[$logged_in_user_id].append(new_tranasction)	
 		puts 'Withdrawal successful.'
 	else
@@ -100,19 +107,20 @@ def withdraw(users_list, transactions_all, amount)
 	end
 end
 
+
 def withdraw_caller(users_list, transactions_all)
 	system "clear"
-	puts 'Enter amount to be withdrawn: '
-	withdraw(users_list, transactions_all, gets.to_i)	
+	withdraw(users_list, transactions_all, input_amount)	
 end
 
 
 def transfer(users_list, transactions_all, transfer_user_id, amount)
+	#todo: transaction not stored for the receiver
 	if users_list[$logged_in_user_id][:balance] >= amount
 		users_list[$logged_in_user_id][:balance] -= amount
 		users_list[transfer_user_id][:balance] += amount
 
-		new_tranasction = {type: "transfer", amount: amount, transfer_user_id: transfer_user_id, balance: users_list[$logged_in_user_id][:balance]}
+		new_tranasction = {type: "transfer", amount: amount, transfer_user_id: transfer_user_id, balance: users_list[$logged_in_user_id][:balance], transaction_time: Time.now}
 		transactions_all[$logged_in_user_id].append(new_tranasction)	
 
 		puts "Transfer of #{amount} to User #{transfer_user_id} is successful."
@@ -127,9 +135,7 @@ def transfer_caller(users_list, transactions_all)
 	transfer_user_id = gets.to_i
 	if(transfer_user_id != $logged_in_user_id)					
 		if users_list[transfer_user_id]
-			puts 'Enter amount to transfer: '
-			amount = gets.to_i
-			transfer(users_list, transactions_all, transfer_user_id, amount)
+			transfer(users_list, transactions_all, transfer_user_id, input_amount)
 		else
 			puts 'The user ID you entered does not exist.'
 		end
@@ -142,16 +148,37 @@ end
 def show_history(transactions_user)
 	#WE GET:
 		#transactions_user = [{}, {}, {}]
-		#transaction = {type: 'deposit', amount: 100, transfer_user_id = 2, balance: 1000}
+		#transaction = {type: 'deposit', amount: 100, transfer_user_id = 2, balance: 1000, time: Time}
 	system "clear"
 	puts "Transaction History:\n"
-	puts "_______________________________________________________"
-	puts "#\tType\t\tAmount\t\tBalance"
-	puts "_______________________________________________________"
+	puts "_________________________________________________________________________________________"
+	puts "#\tType\t\tAmount    \t\tBalance \tTime"
+	puts "_________________________________________________________________________________________"
 	transactions_user.each_with_index do |transaction, count|
-		puts "#{count+1}\t#{transaction[:type]} \t#{transaction[:amount]}#{'(To User ' + transaction[:transfer_user_id].to_s + ')' if transaction[:transfer_user_id]}\t\t#{transaction[:balance]}"
+		puts "#{count+1}\t#{transaction[:type]} \t#{transaction[:amount]}#{transaction[:transfer_user_id] ? ('(To: ' + transaction[:transfer_user_id].to_s + ')'):('     ')}\t\t#{transaction[:balance]} \t#{transaction[:transaction_time]}"
 	end
 end
+
+def transactions_for_duration(transactions_user)
+	#error handling not done
+	system "clear"
+	puts "Enter start time: "
+	start_time = Time.parse(gets).to_i
+
+	puts "Enter end time: "
+	end_time = Time.parse(gets).to_i
+
+	puts "Start: #{start_time}\t End: #{end_time}"
+
+	puts "_________________________________________________________________________________________"
+
+		transactions_user.each_with_index do |transaction, count|
+			if transaction[:transaction_time].to_i >= start_time and transaction[:transaction_time].to_i <= end_time
+			puts "#{count+1}\t#{transaction[:type]} \t#{transaction[:amount]}#{transaction[:transfer_user_id] ? ('(To: ' + transaction[:transfer_user_id].to_s + ')'):('     ')}\t\t#{transaction[:balance]} \t#{transaction[:transaction_time]}"
+		end
+	end
+end
+	
 
 def logout
 	#assign value to the global variable
@@ -175,7 +202,7 @@ while true
 			puts "__________________________________"
 			puts "\n[Your Balance: #{users_list[$logged_in_user_id][:balance]}] [User ID: #{$logged_in_user_id}]"
 			puts "__________________________________"
-			puts "\n1. Deposit\n2. Withdraw\n3. Transfer\n4. Show history\n5. Logout"
+			puts "\n1. Deposit\n2. Withdraw\n3. Transfer\n4. Show history\n5. Find Transactions for a duration\n6. Logout"
 
 			case gets.to_i
 				when 1
@@ -187,6 +214,8 @@ while true
 				when 4
 					show_history(transactions_all[$logged_in_user_id])
 				when 5
+					transactions_for_duration(transactions_all[$logged_in_user_id])
+				when 6
 					logout
 					break
 				else
@@ -195,5 +224,3 @@ while true
 		end
 	end
 end
-
-
