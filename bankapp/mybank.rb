@@ -10,6 +10,11 @@ def save_data(user_record)
 	end
 end
 
+def input(arg)
+  print arg
+  gets.chomp
+end
+
 def add_user(user_record)
 	system 'clear'
 	print 'Enter the name: '
@@ -30,15 +35,9 @@ def login(user_record)
 	print 'Enter userid: '
 	user_id = gets.chomp.to_sym
 	if user_record.has_key? (user_id)
-		print 'Enter password: '
-		if user_record[user_id][:password] == gets.chomp
-			user_interface(user_id,user_record)
-		else
-			abort("Wrong password!! Quiting the app")
-		end
+		user_record[user_id][:password] == input('Enter password: ') ?	user_interface(user_id, user_record) : abort("Wrong password!! Quiting the app")
 	else
-		print "UserId not found. Do you want to create new user(y/n)"
-		if gets.chomp == 'y'
+    if input('UserId not found. Do you want to create new user(y/n)') == 'y'
 			add_user(user_record)
 			login(user_record)
 		else
@@ -47,16 +46,12 @@ def login(user_record)
 	end
 end
 
-def deposit(user_id, user_record)
-	print 'Enter the amount you want to deposit: '
-	amount = gets.chomp.to_i
+def deposit(user_id, user_record, amount)
 	user_record[user_id][:balance] += amount
 	user_record[user_id][:transaction_history].push "User deposited #{amount} on #{Time.now}"
 end
 
-def withdraw(user_id,user_record)
-	print "Enter the amount you want to withdraw: "
-	amount = gets.chomp.to_i
+def withdraw(user_id, user_record, amount)
 	if user_record[user_id][:balance] - amount < 0
 		puts "Transaction invalid: Account balance insufficent"
 	else
@@ -65,53 +60,60 @@ def withdraw(user_id,user_record)
 	end
 end
 
-def money_transfer(user_id,user_record)
-	print 'Enter the user id to transfer money to: '
-	to_id = gets.chomp
-	if user_record.has_key? (to_id)
-		print 'Enter the amount you want to transfer: '
-		amount = gets.chomp.to_i
-		if user_record[user_id][:balance] - amount < 0
-			puts "Transaction invalid: Account balance insufficent"
-		else
-			user_record[user_id][:balance] -= amount
-			user_record[to_id][:balance] += amount
-			user_record[user_id][:transaction_history].push "User transfered #{amount} to #{to_id} on #{Time.now}"
-			user_record[user_id][:transaction_history].push "User got #{amount} from #{user_id} on #{Time.now}"
-		end
-	else
-		print "#{to_id} does not exists if you want to try again (y/n)"
-		if gets.chomp == 'y'
-			money_transfer(user_id)
-		end
-	end
+def money_transfer(user_id, user_record, to_id)
+  if user_id != to_id
+	  if user_record.has_key? (to_id)
+		  print 'Enter the amount you want to transfer: '
+		  amount = gets.chomp.to_i
+		  if user_record[user_id][:balance] - amount < 0
+			  puts "Transaction invalid: Account balance insufficent"
+	    else
+			  user_record[user_id][:balance] -= amount
+			  user_record[to_id][:balance] += amount
+			  user_record[user_id][:transaction_history].push "User transfered #{amount} to #{to_id} on #{Time.now}"
+			  user_record[to_id][:transaction_history].push "User received #{amount} from #{user_id} on #{Time.now}"
+		  end
+	  else
+		  print "#{to_id} does not exists if you want to try again (y/n)"
+		  if gets.chomp == 'y'
+			  money_transfer(user_id)
+		  end
+	  end
+  else puts 'You cannot transfer money to yourself.'
+  end
 end
 
-def transaction_history(user_id,user_record)
+def transaction_history(user_id, user_record)
 	puts "Transaction history of user #{user_id}"
-	user_record[user_id][:transaction_history].each {|x| puts x}
+	user_record[user_id][:transaction_history].each {|transaction| puts transaction}
 	print "\n"
 end
 
-def check_balance(user_id,user_record)
+def check_balance(user_id, user_record)
 	puts "The current balance for user #{user_id} is #{user_record[user_id][:balance]}"
 end
 
-def user_interface(user_id,user_record)
+def user_interface(user_id, user_record)
 	system "clear"
 	begin
 		puts "\t\t Menu\n1.Deposit\n2.Withdraw\n3.Money Transaction\n4.Transaction History\n5.Show Balance\n6.Logout"
 		option = gets.chomp.to_i
 		if option == 1
-			deposit(user_id,user_record)
+	    print 'Enter the amount you want to deposit: '
+	    amount = gets.chomp.to_i
+			deposit(user_id, user_record, amount)
 		elsif option == 2
-			withdraw(user_id,user_record)
+      print "Enter the amount you want to withdraw: "
+      amount = gets.chomp.to_i
+			withdraw(user_id, user_record, amount)
 		elsif option == 3
-			money_transfer(user_id,user_record)
+	    print 'Enter the user id to transfer money to: '
+	    to_id = gets.chomp
+			money_transfer(user_id, user_record, to_id.to_sym)
 		elsif option == 4
-			transaction_history(user_id,user_record)
+			transaction_history(user_id, user_record)
 		elsif option == 5
-			check_balance(user_id,user_record)
+			check_balance(user_id, user_record)
 		end 
 	end	while option != 6
 end

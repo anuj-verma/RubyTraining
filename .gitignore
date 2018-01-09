@@ -3,3 +3,4 @@ try.py
 a.out
 *.swp
 .akshay_sinput.c.swp
+/bankapp/test.rb

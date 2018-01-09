@@ -2,8 +2,17 @@
 :aki:
   :name: akshay
   :email: akshay@mail.com
-  :balance: 442
+  :balance: 2942
   :password: aki
   :transaction_history:
   - User deposited 500 on 2018-01-08 18:02:57 +0530
   - User withdrawn 58 on 2018-01-08 18:07:17 +0530
+  - User received 2500 from ak on 2018-01-09 10:18:35 +0530
+:ak:
+  :name: akshay
+  :email: ak@mail.com
+  :balance: 4997500
+  :password: ak
+  :transaction_history:
+  - User deposited 5000000 on 2018-01-09 10:06:34 +0530
+  - User transfered 2500 to aki on 2018-01-09 10:18:35 +0530
