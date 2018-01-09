@@ -1,18 +1,32 @@
 ---
+:ram:
+  :name: ram
+  :email: ram@123
+  :balance: 13311
+  :password: ram@123
+  :transaction_history:
+  - You deposited amount:100 on 09/01/2018 14:50
+  - You withdrawn amount:55 on 09/01/2018 14:50
+  - You received from kam amount:1254 on 09/01/2018 14:52
+  - You received from aki amount:12011 on 09/01/2018 15:44
+  - You received from aki amount:1 on 09/01/2018 16:24
+:kam:
+  :name: kam
+  :email: kam@haram.com
+  :balance: 11301
+  :password: kam
+  :transaction_history:
+  - You deposited amount:12555 on 09/01/2018 14:52
+  - You transferred to ram amount:1254 on 09/01/2018 14:52
 :aki:
   :name: akshay
-  :email: akshay@mail.com
-  :balance: 2942
+  :email: aki@mail.com
+  :balance: 186496
   :password: aki
   :transaction_history:
-  - User deposited 500 on 2018-01-08 18:02:57 +0530
-  - User withdrawn 58 on 2018-01-08 18:07:17 +0530
-  - User received 2500 from ak on 2018-01-09 10:18:35 +0530
-:ak:
-  :name: akshay
-  :email: ak@mail.com
-  :balance: 4997500
-  :password: ak
-  :transaction_history:
-  - User deposited 5000000 on 2018-01-09 10:06:34 +0530
-  - User transfered 2500 to aki on 2018-01-09 10:18:35 +0530
+  - You deposited amount:100 on 09/10/2017 15:44
+  - You withdrawn amount:50 on 09/11/2017 15:44
+  - You deposited amount:200000 on 09/12/2017 15:44
+  - You withdrawn amount:1542 on 01/01/2018 15:44
+  - You transferred to ram amount:12011 on 09/01/2018 15:44
+  - You transferred to ram amount:1 on 09/01/2018 16:24
