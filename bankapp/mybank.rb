@@ -13,7 +13,7 @@ end
 
 def input(statement)
   print statement
-  gets.chomp
+  block_given? ? yield(gets.chomp) : gets.chomp
 end
 
 def enter_valid_passwd(statement)
@@ -23,25 +23,46 @@ def enter_valid_passwd(statement)
 end
 
 def enter_valid_user_id(user_record, statement)
-  user_id = input(statement)
-  if user_id.length != 0
-    if user_record.has_key? (user_id.to_sym)
-      print 'Conflict: UserId already exist'
+  user_id = input(statement) {|id| id.to_sym}
+  if user_id.to_s.empty?
+    puts 'Conflict: UserId cannot be Blank'
+    enter_valid_user_id(user_record, statement)
+  end
+  if user_record.has_key? (user_id)
+      puts 'Conflict: UserId already exist'
       enter_valid_user_id(user_record, statement)
-    else
-      return user_id
-    end
+  else
+      user_id
+  end
+end
+
+def enter_valid_payee_id(user_record, statement)
+  payee_id = input(statement) { |id| id.sym }
+  if payee_id.to_s.empty?
+    puts 'Conflict: PayeeId cannot be empty'
+    enter_valid_payee_id(user_record, statement)
+  end
+  unless user_record.has_key? (payee_id)
+    puts 'Conflict: PayeeId does not exist'
+    enter_valid_payee_id(user_record, statement)
+  else
+    payee_id
   end
 end
 
 def enter_valid_email(statement)
   email = input(statement)
-  email.length !=0 ? email : enter_valid_email(statement)
+  email.empty? ? enter_valid_email(statement) : email
 end
 
 def enter_valid_name(statement)
-  email = input(statement)
-  email.length !=0 ? email : enter_valid_email(statement)
+  name = input(statement)
+  name.empty? ? enter_valid_name(statement) : name
+end
+
+def enter_valid_date(statement)
+  date = input(statement)
+  date.empty? ? enter_valid_date(statement) : date
 end
 
 def add_user(user_record)
@@ -51,12 +72,12 @@ def add_user(user_record)
 	user_id = enter_valid_user_id(user_record, 'Enter the new UserId: ')
 	password = enter_valid_passwd('Enter the new Password(pass length >= 8): ')
 	user_info = {name: name, email: email, balance: 0, password: password, transaction_history: []} 
-	user_record.store(user_id.to_sym,user_info)
+	user_record.store(user_id,user_info)
 end
 
 def login(user_record)
 	system 'clear'
-	user_id = input("\n\n\t\t::::::Login Window:::::\nEnter UserId: ").to_sym
+	user_id = input("\n\t\t::::::Login Window:::::\nEnter UserId: ").to_sym
 	if user_record.has_key? (user_id)
 		user_record[user_id][:password] == STDIN.getpass('Enter the Password: ') ? user_interface(user_id, user_record) : abort("Wrong password!! Quiting the app")
 	else
@@ -91,6 +112,7 @@ end
 def deposit(user_id, user_record, amount)
   #update_balance(user_record, user_id, :deposit, amount)
   update_bal(user_record, user_id, amount) { |record, id, amount| record[id][:balance] += amount }
+  check_balance(user_id, user_record)
   make_transaction_history(user_record, user_id, amount, 'deposited')
 end
 
@@ -100,27 +122,22 @@ def withdraw(user_id, user_record, amount)
 	else
     #update_balance(user_record, user_id, :transfer, amount) 
     update_bal(user_record, user_id, amount) { |record, id, amount| record[id][:balance] -= amount }
+    check_balance(user_id, user_record)
     make_transaction_history(user_record, user_id, amount, 'withdrawn') 
 	end
 end
 
 def money_transfer(user_id, user_record, to_id, amount)
-  if user_id != to_id
-	  if user_record.has_key? (to_id)
-		  if user_record[user_id][:balance] - amount < 0
-			  puts 'Invalid Transaction: Account balance insufficent.'
-	    else
-        #update_balance(user_record, user_id, :transfer, amount)
-        update_bal(user_record, user_id, amount) { |record, id, amount| record[id][:balance] -= amount }
-        make_transaction_history(user_record, user_id, amount, "transferred to #{to_id}" )
-        #update_balance(user_record, to_id, :deposit, amount)
-        update_bal(user_record, to_id, amount) { |record, id, amount| record[id][:balance] += amount }
-        make_transaction_history(user_record, to_id, amount, "received from #{user_id}" )
-		  end
-    elsif input("#{to_id} does not exists if you want to try again (y/n)") == 'y' 
-      money_transfer(user_id) 
-    end
-  else puts 'Invalid Transaction:You cannot transfer money to yourself.'
+  if user_id == to_id
+    puts 'Invalid Transaction:You cannot transfer money to yourself.'
+  end
+	if user_record[user_id][:balance] - amount < 0
+	  puts 'Invalid Transaction: Account balance insufficent.'
+	else
+    update_bal(user_record, user_id, amount) { |record, id, amount| record[id][:balance] -= amount }
+    make_transaction_history(user_record, user_id, amount, "transferred to #{to_id}" )
+    update_bal(user_record, to_id, amount) { |record, id, amount| record[id][:balance] += amount }
+    make_transaction_history(user_record, to_id, amount, "received from #{user_id}" )
   end
 end
 
@@ -129,7 +146,7 @@ def transaction_history(user_id, user_record, from_date, to_date)
 	user_record[user_id][:transaction_history].each do |transaction|
     transaction_date = transaction[-16..-7]
     #puts transaction if DateTime.parse(from_date) <= Date.parse(transaction_date) and Date.parse(to_date) >= Date.parse(transaction_date)
-    puts transaction if DateTime.parse(transaction_date).between?(DateTime.parse(from_date),DateTime.parse(to_date))
+    puts transaction if DateTime.parse(transaction_date).between?(DateTime.parse(from_date), DateTime.parse(to_date))
   end
 end
 
@@ -140,21 +157,21 @@ end
 def user_interface(user_id, user_record)
 	system 'clear'
 	begin
-    option = input("\t\t Menu\n1.Deposit\n2.Withdraw\n3.Money Transaction\n4.Transaction History\n5.Show Balance\n6.Logout\n").to_i
+    option = input("\t\t Menu\n1.Deposit\n2.Withdraw\n3.Money Transaction\n4.Transaction History\n5.Show Balance\n6.Logout\n") {|x| x.to_i}
     case option
       when 1
-        amount = input('Enter the Amount you want to deposit: ').to_i
+        amount = input('Enter the Amount you want to deposit: ') {|amount| amount.to_i}
 			  deposit(user_id, user_record, amount)
       when 2
-        amount = input('Enter the Amount you want to withdraw: ').to_i
+        amount = input('Enter the Amount you want to withdraw: ') {|amount| amount.to_i}
 			  withdraw(user_id, user_record, amount)
       when 3
-	      to_id = input('Enter the UserId to transfer money to: ')
-		    amount = input('Enter the Amount you want to transfer: ').to_i
-			  money_transfer(user_id, user_record, to_id.to_sym, amount)
+	      to_id = enter_valid_payee_id(user_record, 'Enter the UserId to transfer money to: ') #validate to_id
+		    amount = input('Enter the Amount you want to transfer: ') {|amount| amount.to_i}
+			  money_transfer(user_id, user_record, to_id, amount)
       when 4
-        from_date = input('Enter the Start date(dd/mm/yyyy): ')
-        to_date = input('Enter the End date(dd/mm/yyyy): ')
+        from_date = enter_valid_date('Enter the Start date(dd/mm/yyyy): ')
+        to_date = enter_valid_date('Enter the End date(dd/mm/yyyy): ')
 			  transaction_history(user_id, user_record, from_date, to_date)
       when 5
 			  check_balance(user_id, user_record)
