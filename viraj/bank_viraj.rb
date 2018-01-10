@@ -63,8 +63,7 @@ def save_transaction(transactions, user_id, type, amount, transfer_user_id, bala
 end
 
 #works for 'deposit' and 'withdraw'
-def transact(users_list, transactions)
-	amount = get_valid_num("Enter amount: ")
+def transact(users_list, transactions, amount)
 	if block_given?
 		transact_info = yield(amount)
 		users_list[$logged_in_user_id][:balance] = transact_info[:balance].to_i	
@@ -77,16 +76,16 @@ def transact(users_list, transactions)
 	end
 end
 
-def deposit(users_list, transactions)
-	transact(users_list, transactions) do |amount| 
+def deposit(users_list, transactions, amount)
+	transact(users_list, transactions, amount) do |amount| 
 		{ balance: users_list[$logged_in_user_id][:balance] + amount,
 			type: "Deposit",
 			message: "Deposit successful" }
 	end
 end
 
-def withdraw(users_list, transactions)
-	transact(users_list, transactions) do |amount| 
+def withdraw(users_list, transactions, amount)
+	transact(users_list, transactions, amount) do |amount| 
 		if users_list[$logged_in_user_id][:balance] < amount
 			puts "Insufficient balance"
 			return false
@@ -189,11 +188,11 @@ while true
 			case gets.to_i
 				when 1
 					system "clear"
-					deposit(users_list, transactions)
+					deposit(users_list, transactions, get_valid_num("Enter amount: "))
 					show_history(transactions[$logged_in_user_id])
 				when 2
 					system "clear"
-					next unless withdraw(users_list, transactions)
+					next unless withdraw(users_list, transactions, get_valid_num("Enter amount: "))
 					show_history(transactions[$logged_in_user_id])
 				when 3
 					system "clear"
