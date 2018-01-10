@@ -23,7 +23,7 @@
 :aki:
   :name: akshay
   :email: aki@mail.com
-  :balance: 201019
+  :balance: 201119
   :password: aki
   :transaction_history:
   - You deposited amount:100 on 09/10/2017 15:44
@@ -33,6 +33,7 @@
   - You transferred to ram amount:12011 on 09/01/2018 15:44
   - You transferred to ram amount:1 on 09/01/2018 16:24
   - You received from Akhil amount:14523 on 09/01/2018 17:49
+  - You deposited amount:100 on 10/01/2018 13:25
 :Akhil:
   :name: Akil
   :email: Akhil@mail.com
@@ -50,3 +51,11 @@
   :transaction_history:
   - You deposited amount:10000025 on 09/01/2018 18:32
   - You withdrawn amount:551515 on 09/01/2018 18:32
+:Akshay:
+  :name: Akshay
+  :email: mailakshay@mail.com
+  :balance: 1380
+  :password: '12345678'
+  :transaction_history:
+  - You deposited amount:1500 on 10/01/2018 14:13
+  - You withdrawn amount:120 on 10/01/2018 14:15

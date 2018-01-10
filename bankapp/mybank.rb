@@ -19,7 +19,7 @@ end
 def enter_valid_passwd(statement)
   print statement
   passwd = STDIN.getpass
-  passwd.length < 8 ? enter_valid_pass(statement) : passwd
+  passwd.length < 8 ? enter_valid_passwd(statement) : passwd
 end
 
 def enter_valid_user_id(user_record, statement)
@@ -56,7 +56,7 @@ end
 
 def login(user_record)
 	system 'clear'
-	user_id = input("\n\t\t::::::Login Window:::::\nEnter UserId: ").to_sym
+	user_id = input("\n\n\t\t::::::Login Window:::::\nEnter UserId: ").to_sym
 	if user_record.has_key? (user_id)
 		user_record[user_id][:password] == STDIN.getpass('Enter the Password: ') ? user_interface(user_id, user_record) : abort("Wrong password!! Quiting the app")
 	else
@@ -78,12 +78,19 @@ def update_balance(user_record, user_id, operation, amount)
   end
 end
 
+def update_bal(user_record, user_id, amount)
+  if block_given?
+    yield(user_record, user_id, amount)
+  end
+end
+
 def make_transaction_history(user_record, user_id, amount, msg)
   user_record[user_id][:transaction_history] << "You #{msg} amount:#{amount} on #{Time.now.strftime("%d/%m/%Y %H:%M")}"
 end
 
 def deposit(user_id, user_record, amount)
-  update_balance(user_record, user_id, :deposit, amount)
+  #update_balance(user_record, user_id, :deposit, amount)
+  update_bal(user_record, user_id, amount) { |record, id, amount| record[id][:balance] += amount }
   make_transaction_history(user_record, user_id, amount, 'deposited')
 end
 
@@ -91,8 +98,9 @@ def withdraw(user_id, user_record, amount)
 	if user_record[user_id][:balance] - amount < 0
 		puts 'Invalid Transaction: Account balance insufficent.'
 	else
-    update_balance(user_record, user_id, :transfer, amount)
-    make_transaction_history(user_record, user_id, amount, 'withdrawn')
+    #update_balance(user_record, user_id, :transfer, amount) 
+    update_bal(user_record, user_id, amount) { |record, id, amount| record[id][:balance] -= amount }
+    make_transaction_history(user_record, user_id, amount, 'withdrawn') 
 	end
 end
 
@@ -102,9 +110,11 @@ def money_transfer(user_id, user_record, to_id, amount)
 		  if user_record[user_id][:balance] - amount < 0
 			  puts 'Invalid Transaction: Account balance insufficent.'
 	    else
-        update_balance(user_record, user_id, :transfer, amount)
+        #update_balance(user_record, user_id, :transfer, amount)
+        update_bal(user_record, user_id, amount) { |record, id, amount| record[id][:balance] -= amount }
         make_transaction_history(user_record, user_id, amount, "transferred to #{to_id}" )
-        update_balance(user_record, to_id, :deposit, amount)
+        #update_balance(user_record, to_id, :deposit, amount)
+        update_bal(user_record, to_id, amount) { |record, id, amount| record[id][:balance] += amount }
         make_transaction_history(user_record, to_id, amount, "received from #{user_id}" )
 		  end
     elsif input("#{to_id} does not exists if you want to try again (y/n)") == 'y' 
