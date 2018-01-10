@@ -1,54 +1,51 @@
 #bank program (Before: 167 lines)
 
 #TODO:
-	#BUG: enetering non-numeric data where numeric input is expected doesn't raise an error
-	#transaction not stored for the receiver
 	#validate all input
 
 require "time"
 #each user is stored as a hash e.g. #user = {balance: 765, password: "asda"}
-#every such user hashes are stored in a hash called users_list
-users_list = {}					#no user exists in the beginning
+#every such user hash is stored in a hash called users_list
+users_list = {}					
 
 #HOW TRANSACTIONS ARE STORED
-	#transactions_all = {user_id1: [{}, {}, {}], user_id1: [{}, {}, {}]}
-	#transactions_user = [{}, {}, {}]
+	#transactions = {user_id1: [{}, {}, {}], user_id1: [{}, {}, {}]}
+	#user_transactions = [{}, {}, {}]
 	#transaction = {type: 'deposit', amount: 100, transfer_user_id = 2, balance: 1000, time: Time.now}
-transactions_all = {}
+transactions = {}
 
 #made global to conveniently check if a user is logged in or not
 $logged_in_user_id = false		#false if user not logged in
 
 
-#saves to the hash 'users_list' and returns the newly created user_id
-def register(users_list, transactions_all, password)
+def register(users_list, transactions)
 	#new user_id is generated using the lenght of the hash 'users_list'
 	#a different approach should be used to generate user_id if the function to delete a user is implemented
+
+	puts 'Enter your new password: '
+	password = gets.chomp.to_s
 
 	new_user_id = users_list.length + 1
 	new_user = {balance: 0, password: password}
 	users_list[new_user_id] = new_user
 
-	transactions_all[new_user_id] = []
+	transactions[new_user_id] = []
 
 	$logged_in_user_id = new_user_id
 	puts "Registration successful. Your ID is #{$logged_in_user_id}."
 
-	new_user_id
+	$logged_in_user_id = new_user_id
+
+	true
 end
 
-def register_caller(users_list, transactions_all, user_id)
-	puts "\nUser #{user_id} is not registered.\nWould you like to register?(y/n)"
-	if gets.chomp.eql? 'y'
-		puts 'Enter your new password: '
-		$logged_in_user_id = register(users_list, transactions_all, gets.chomp)
-		true
-	else
-		false 	#user doesn't want to register
+
+def login(users_list)
+	user_id = get_int("Enter User ID: ")
+	if !users_list[user_id]
+		puts "User ID doesn't exist.\n"
+		return false
 	end
-end
-
-def login
 	puts 'Enter your password: '
 	if gets.to_s.chomp == users_list[user_id][:password]
 		$logged_in_user_id = user_id
@@ -61,68 +58,47 @@ def login
 end
 
 
-def login_caller(users_list, transactions_all, user_id)
-	#if user does exist
-	if users_list[user_id]
-		login(users_list, transactions_all, user_id)
-
-	#if user doesn't exist
-	else
-		register_caller(users_list, transactions_all, user_id)
-	end
-end
-
-def input_amount
-	puts 'Enter amount: '
+def get_int(message)
+	puts message
 	while true
 		amount = gets.to_i
 		return amount if amount > 0
-		puts "Negaive amount cannot be entered."
+		puts "Invalid input"
 	end
 end
 
-
-def deposit(users_list, transactions_all, amount)
+def deposit(users_list, transactions, amount)
 	users_list[$logged_in_user_id][:balance] += amount
 
 	new_tranasction = {type: "Deposit", amount: amount, balance: users_list[$logged_in_user_id][:balance], transaction_time: Time.now}
-	transactions_all[$logged_in_user_id].append(new_tranasction)
-end
+	transactions[$logged_in_user_id].append(new_tranasction)
 
-def deposit_caller(users_list, transactions_all)
-	system "clear"		
-	deposit(users_list, transactions_all, input_amount)
 	puts 'Deposit successful.'	
 end
 
-
-def withdraw(users_list, transactions_all, amount)
+def withdraw(users_list, transactions, amount)
 	if users_list[$logged_in_user_id][:balance] >= amount
 		users_list[$logged_in_user_id][:balance] -= amount
 
 		new_tranasction = {type: "Withdraw", amount: amount, balance: users_list[$logged_in_user_id][:balance], transaction_time: Time.now}
-		transactions_all[$logged_in_user_id].append(new_tranasction)	
+		transactions[$logged_in_user_id].append(new_tranasction)	
 		puts 'Withdrawal successful.'
 	else
 		puts "You do not have #{amount} rupees in your account."
 	end
 end
 
-
-def withdraw_caller(users_list, transactions_all)
-	system "clear"
-	withdraw(users_list, transactions_all, input_amount)	
-end
-
-
-def transfer(users_list, transactions_all, transfer_user_id, amount)
-	#todo: transaction not stored for the receiver
+def transfer(users_list, transactions, transfer_user_id, amount)
 	if users_list[$logged_in_user_id][:balance] >= amount
 		users_list[$logged_in_user_id][:balance] -= amount
 		users_list[transfer_user_id][:balance] += amount
 
-		new_tranasction = {type: "transfer", amount: amount, transfer_user_id: transfer_user_id, balance: users_list[$logged_in_user_id][:balance], transaction_time: Time.now}
-		transactions_all[$logged_in_user_id].append(new_tranasction)	
+		sender_tranasction = {type: "Transfer", amount: amount, transfer_user_id: transfer_user_id, balance: users_list[$logged_in_user_id][:balance], transaction_time: Time.now, action: "To"}
+		transactions[$logged_in_user_id].append(sender_tranasction)
+
+
+		receiver_tranasction = {type: "Transfer", amount: amount, transfer_user_id: $logged_in_user_id, balance: users_list[transfer_user_id][:balance], transaction_time: Time.now, action: "From"}
+		transactions[transfer_user_id].append(receiver_tranasction)	
 
 		puts "Transfer of #{amount} to User #{transfer_user_id} is successful."
 	else
@@ -130,13 +106,11 @@ def transfer(users_list, transactions_all, transfer_user_id, amount)
 	end
 end
 
-def transfer_caller(users_list, transactions_all)
-	system "clear"
-	puts 'Enter user ID to transfer money: '
-	transfer_user_id = gets.to_i
+def transfer_dialog(users_list, transactions)
+	transfer_user_id = get_int("Enter user ID to transfer money: ")
 	if(transfer_user_id != $logged_in_user_id)					
 		if users_list[transfer_user_id]
-			transfer(users_list, transactions_all, transfer_user_id, input_amount)
+			transfer(users_list, transactions, transfer_user_id, get_int("Enter amount: "))
 		else
 			puts 'The user ID you entered does not exist.'
 		end
@@ -145,83 +119,88 @@ def transfer_caller(users_list, transactions_all)
 	end	
 end
 
-
-def show_history(transactions_user)
+def show_history(user_transactions)
 	#WE GET:
-		#transactions_user = [{}, {}, {}]
+		#user_transactions = [{}, {}, {}]
 		#transaction = {type: 'deposit', amount: 100, transfer_user_id = 2, balance: 1000, time: Time}
-	system "clear"
 	puts "Transaction History:\n"
 	puts "_________________________________________________________________________________________"
 	puts "#\tType\t\tAmount    \t\tBalance \tTime"
 	puts "_________________________________________________________________________________________"
-	transactions_user.each_with_index do |transaction, count|
-		puts "#{count+1}\t#{transaction[:type]} \t#{transaction[:amount]}#{transaction[:transfer_user_id] ? ('(To: ' + transaction[:transfer_user_id].to_s + ')'):('     ')}\t\t#{transaction[:balance]} \t#{transaction[:transaction_time]}"
+	user_transactions.each_with_index do |transaction, count|
+		puts "#{count+1}\t#{transaction[:type]} \t#{transaction[:amount]}#{transaction[:transfer_user_id] ? ('('+ transaction[:action] +': ' + transaction[:transfer_user_id].to_s + ')'):('     ')}\t\t#{transaction[:balance]} \t#{transaction[:transaction_time]}"
 	end
 end
 
-def transactions_for_duration(transactions_user)
+
+def transactions_for_duration(user_transactions)
 	#error handling not done
-	system "clear"
-	puts "Enter start time: "
+	puts "Enter start time: (format: '9 jan 2018 16:35:20')"
 	start_time = Time.parse(gets).to_i
 
-	puts "Enter end time: "
+	puts "Enter end time: (format: '9 jan 2018 16:35:20')"
 	end_time = Time.parse(gets).to_i
-
-	puts "Start: #{start_time}\t End: #{end_time}"
 
 	puts "_________________________________________________________________________________________"
 
-		transactions_user.each_with_index do |transaction, count|
+		user_transactions.each_with_index do |transaction, count|
 			if transaction[:transaction_time].to_i >= start_time and transaction[:transaction_time].to_i <= end_time
 			puts "#{count+1}\t#{transaction[:type]} \t#{transaction[:amount]}#{transaction[:transfer_user_id] ? ('(To: ' + transaction[:transfer_user_id].to_s + ')'):('     ')}\t\t#{transaction[:balance]} \t#{transaction[:transaction_time]}"
 		end
 	end
 end
 	
-
 def logout
-	#assign value to the global variable
-	$logged_in_user_id = false
+	$logged_in_user_id = false		#assign value to the global variable
 end
 
 
 #execution starts here:
 while true
-	puts "To login, enter your ID: (Enter 0 to exit)"
-	user_id = gets.chomp.to_i
+	puts "\n1. Login\n2. Register\n3. Exit"
 
-	if user_id == 0
-		#user chose to exit
-		break
+	case gets.chomp.to_i
+	when 1
+		system "clear"
+		next unless login(users_list)
+	when 2
+		system "clear"
+		register(users_list, transactions)
+	when 3
+		exit
 	end
 
-	if login_caller(users_list, transactions_all, user_id)
 		#loops until user logs out
 		while true
 			puts "__________________________________"
 			puts "\n[Your Balance: #{users_list[$logged_in_user_id][:balance]}] [User ID: #{$logged_in_user_id}]"
 			puts "__________________________________"
-			puts "\n1. Deposit\n2. Withdraw\n3. Transfer\n4. Show history\n5. Find Transactions for a duration\n6. Logout"
+			puts "\n1. Deposit\n2. Withdraw\n3. Transfer\n4. Show history\n5. Find Transactions for a duration\n6. Logout\n7. Exit"
 
 			case gets.to_i
 				when 1
-					deposit_caller(users_list, transactions_all)
+					system "clear"
+					deposit(users_list, transactions, get_int("Enter amount: "))
 				when 2
-					withdraw_caller(users_list, transactions_all)
+					system "clear"
+					withdraw(users_list, transactions, get_int("Enter amount: "))
 				when 3
-					transfer_caller(users_list, transactions_all)
+					system "clear"
+					transfer_dialog(users_list, transactions)
 				when 4
-					show_history(transactions_all[$logged_in_user_id])
+					system "clear"
+					show_history(transactions[$logged_in_user_id])
 				when 5
-					transactions_for_duration(transactions_all[$logged_in_user_id])
+					system "clear"
+					transactions_for_duration(transactions[$logged_in_user_id])
 				when 6
+					system "clear"
 					logout
 					break
+				when 7
+					exit
 				else
 					puts "Enter valid option."
 			end
 		end
-	end
 end
