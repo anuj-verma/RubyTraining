@@ -34,14 +34,14 @@ def enter_valid_user_id(user_record, statement)
   end
 end
 
-def enter_valid_email(arg)
-  email = input(arg)
-  email.length !=0 ? email : enter_valid_email(arg)
+def enter_valid_email(statement)
+  email = input(statement)
+  email.length !=0 ? email : enter_valid_email(statement)
 end
 
-def enter_valid_name(arg)
-  email = input(arg)
-  email.length !=0 ? email : enter_valid_email(arg)
+def enter_valid_name(statement)
+  email = input(statement)
+  email.length !=0 ? email : enter_valid_email(statement)
 end
 
 def add_user(user_record)
@@ -118,7 +118,8 @@ def transaction_history(user_id, user_record, from_date, to_date)
 	puts "Transaction history of user #{user_id}"
 	user_record[user_id][:transaction_history].each do |transaction|
     transaction_date = transaction[-16..-7]
-    puts transaction if DateTime.parse(from_date) <= Date.parse(transaction_date) and Date.parse(to_date) >= Date.parse(transaction_date)
+    #puts transaction if DateTime.parse(from_date) <= Date.parse(transaction_date) and Date.parse(to_date) >= Date.parse(transaction_date)
+    puts transaction if DateTime.parse(transaction_date).between?(DateTime.parse(from_date),DateTime.parse(to_date))
   end
 end
 
@@ -154,7 +155,7 @@ end
 
 def main
 	user_record=load_data
-	print user_record
+	#print user_record
 	login(user_record)
 	save_data(user_record)
 end
