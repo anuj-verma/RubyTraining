@@ -1,5 +1,5 @@
 account = Hash[:jyoti => Hash[:password => "abc",:name => "Jyoti Sharma", :balance => 200, :history => Hash[]]]
-
+require 'date'
 def new_user(account) 
   puts "***New User***\nEnter username : "
   logged_username = gets.chomp
@@ -38,7 +38,7 @@ def withdraw(logged_username, amount,account)
   else
     account[logged_username.to_sym][:balance] = account[logged_username.to_sym][:balance].to_i - amount.to_i
     puts "New Balance : #{account[logged_username.to_sym][:balance]}"
-    require 'date'
+    
     date = DateTime.now
    #time = date.strftime("%H:%M:%S")
     timestr = date.to_s
@@ -50,7 +50,7 @@ end
 def deposit(logged_username, amount, account)
   puts "Available Balance : #{account[logged_username.to_sym][:balance]}"
   account[logged_username.to_sym][:balance] = account[logged_username.to_sym][:balance].to_i + amount.to_i
-  require 'date'
+
   date = DateTime.now
  # time = date.strftime("%H:%M:%S")
   timestr = date.to_s
@@ -60,7 +60,7 @@ def deposit(logged_username, amount, account)
 end
 	
 def transfer (logged_username, account)
-  require 'date'
+
   date = DateTime.now
   #time = date.strftime("%H:%M:%S")
   timestr = date.to_s
@@ -96,7 +96,7 @@ def time_history(logged_username,account)
   fromtime = gets.chomp
   puts "\nEnter date to in 24 hrs : "
   totime = gets.chomp
-  account[logged_username.to_sym][:history].each {|key,value| puts"#{key}----> #{value}" if (Date.parse(key).between?(Date.parse(fromtime),Date.parse(totime))  )}
+  account[logged_username.to_sym][:history].each {|key,value| puts"#{key}----> #{value}" if (DateTime.parse(key).between?(DateTime.parse(fromtime),DateTime.parse(totime))  )}
   puts "Total Balance : #{account[logged_username.to_sym][:balance]}"
   display_menu(logged_username,account)
 end  
