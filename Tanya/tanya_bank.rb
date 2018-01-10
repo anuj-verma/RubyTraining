@@ -1,4 +1,4 @@
-re 'date'
+require 'date'
 users={tanyasaroha: {name: "Tanya Saroha", password: "12345", email: "tanya@gmail.com", balance: 50000, transaction_history: [{transaction: "Deposited 20000", date: "2018-01-08"},{transaction: "Deposited 30000", date: "2018-01-07"}]}, priyanka: {name: "Priyanka Yadav", password: "12345", email: "priyank@josh.com", balance: 23000, transaction_history: [{transaction: "Deposited 23000", date: "2018-01-08"}]}, pinky: {name: "Pinky Rout", password: "123456", email: "pinky@gmail.com", balance: 30000, transaction_history: [{transaction: "Deposited 30000", date: "2018-01-08"}]}}
 
 def register(users)
