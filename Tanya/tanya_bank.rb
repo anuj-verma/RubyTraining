@@ -1,11 +1,19 @@
 require 'date'
 users={tanyasaroha: {name: "Tanya Saroha", password: "12345", email: "tanya@gmail.com", balance: 50000, transaction_history: [{transaction: "Deposited 20000", date: "2018-01-08"},{transaction: "Deposited 30000", date: "2018-01-07"}]}, priyanka: {name: "Priyanka Yadav", password: "12345", email: "priyank@josh.com", balance: 23000, transaction_history: [{transaction: "Deposited 23000", date: "2018-01-08"}]}, pinky: {name: "Pinky Rout", password: "123456", email: "pinky@gmail.com", balance: 30000, transaction_history: [{transaction: "Deposited 30000", date: "2018-01-08"}]}}
 
+def read_input(message)
+	puts message
+	input = yield(gets.chomp) if block_given?
+	return input
+end
+
 def register(users)
 	puts "Please provide following details to register"
-	puts "Your Username:-"
-	new_username = gets.chomp.to_sym
-
+	new_username = read_input('Username') do |user_name|
+	user_name.to_sym
+	end
+#	puts "Your Username:-"
+#	new_username = gets.chomp.to_sym
 	if(users[new_username] == nil)
 		puts "Your Password:-"
 		new_password = gets.chomp {|q| q.echo = "*"}
