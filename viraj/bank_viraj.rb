@@ -3,6 +3,7 @@
 #TODO:
 	#BUG: enetering non-numeric data where numeric input is expected doesn't raise an error
 	#transaction not stored for the receiver
+	#validate all input
 
 require "time"
 #each user is stored as a hash e.g. #user = {balance: 765, password: "asda"}
