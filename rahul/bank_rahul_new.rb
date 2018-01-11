@@ -1,145 +1,150 @@
 require 'date'
-user_information = {'rahul': {email: 'rahul', password: 'rahul', balance: 0.0}, 'rj': {email: 'rj', password: '123', balance: 0.0}}
+user_information = { 
+  'rahul': { 
+    name: 'rahul', 
+    password: 'rahul', 
+    balance: 0.0
+   }, 
+  'rj': {
+    name: 'rj', 
+    password: '123', 
+    balance: 0.0
+  }
+}
 transaction_history = {}
 
-def login(user_id)
- if user_id
-    puts 'enter password'
-    pass_word = gets.chop
-    if user_id[:password] == pass_word
-      return user_id
-    else
-      puts 'Invalid Password'
-      return nil
-    end
-  else
-   puts 'User does not Exist!'
-  end
+def login(user_info)
+  return perform_io('User does not Exist!') if user_info.nil?
+  pass_word = perform_io('enter password') { gets.chop }
+  return perform_io('Invalid Password') if user_info[:password] != pass_word
+  return user_info
 end
 
-def new_user(user_information , user_name , pass_word)
-  user_information.merge!(:"#{user_name}" => {:email => "#{user_name}", :password => "#{pass_word}", :balance => 0.0})
+def new_user(user_information, user_name, pass_word)
+  user_information.merge!(
+	user_name.to_sym => {
+    name: user_name, password: pass_word, balance:  0.0
+		}
+	)
 end
 
-def store_history(user_id , transaction_history , history , time , total)
-  transaction_history[:user_id] << ({time: "#{time}", info: " #{history}", total: total})
-end
-
-def get_time()
+def current_time
   time = Time.now
   return time.strftime("%Y-%m-%d %H:%M:%S")
 end
 
-def deposit(user_id , amount , transaction_history)
-  total = user_id[:balance] += amount
-  time = get_time()
-  deposit_history = "deposited => #{amount}"
-  store_history(user_id , transaction_history , deposit_history , time , total)
+def perform_io(type)
+  puts "#{type}"
+  yield if block_given?
 end
 
-def withdraw(user_id , amount , transaction_history)
-  if (user_id[:balance] - amount) >= 0.0
-    total = user_id[:balance] -= amount
-    time = get_time()
-    withdraw_history = "withdraw => #{amount}"
-    store_history(user_id , transaction_history , withdraw_history , time , total)
-  else
-    puts 'balance is LOW.'
-  end
+def store_history(user_info, transaction_history, history, time, total, amount)
+  transaction_history[:user_info] << ({
+	time: time, 
+	info: {
+		operation: history, amount: amount, balance: total
+		}
+	})
 end
 
-def money_transfer(user_id , receiver_id , amount , transaction_history)
-  if receiver_id
-    if (user_id[:balance] - amount) >= 0.0
-      receiver_id[:balance] += amount
-      total = user_id[:balance] -= amount
-      time = get_time()
-      transfer_history = "Transfered to #{receiver_id[:email]} => #{amount}"
-      store_history(user_id , transaction_history , transfer_history , time , total)
-    else
-      puts 'balance is LOW.'
-    end
-  else
-    puts 'invalid user.'
-  end
+def deposit(user_info, amount, transaction_history)
+  store_history(
+								user_info, 
+								transaction_history, 
+								'deposited', 
+								current_time, 
+								user_info[:balance] += amount, 
+								amount
+								)
+end
+
+def withdraw(user_info, amount, transaction_history)
+  return perform_io('Balance is LOW.') if (user_info[:balance] - amount) <= 0.0
+  store_history(
+								user_info, 
+								transaction_history, 
+								'withdraw', 
+								current_time, 
+								user_info[:balance] -= amount, 
+								amount
+								)
+end
+
+def money_transfer(user_info, receiver_info, amount, transaction_history)
+  return perform_io('Invalid User') if receiver_info.nil?
+  return perform_io('Balance in LOW') if (user_info[:balance] - amount) <= 0.0
+  receiver_info[:balance] += amount
+  store_history(
+								user_info, 
+								transaction_history, 
+								"Transfered to #{receiver_info[:email]}", 
+								current_time, 
+								user_info[:balance] -= amount, 
+								amount
+								)
 end
   
-def transaction_info(transaction_history , user_id , start_date , end_date)
-  transaction_history[:user_id].select do |transaction| 
-    if Date.parse(start_date) <= Date.parse(transaction[:time]) && Date.parse(transaction[:time]) <= Date.parse(end_date)
-      p transaction
-    end
-  end 
+def transaction_info(transaction_history, user_info, start_date, end_date)
+  transactions = transaction_history[:user_info].select do |transaction| 
+  Date.parse(start_date) <= Date.parse(transaction[:time]) && 
+				Date.parse(transaction[:time]) <= Date.parse(end_date)
+  end
+  puts transactions 
 end
 
-def check_balance(user_id)
-  puts user_id[:balance]
+def check_balance(user_info)
+  puts user_info[:balance]
 end
 
-def banking_options(user_information , transaction_history)
-  iterator = 0
-  while iterator != 3 do
-    puts "Enter \n 1.Login \n 2.Register \n 3.exit"
-    iterator = gets.chop.to_i
-    case iterator
-    when 1
-      puts "LOGIN: \n enter username"
-      user_name = gets.chop
-      user = user_information[:"#{user_name}"]
-      user_id = login(user)
-      if user_id != nil
-        puts 'Welcome!!'
-	transaction_history[:user_id] = []	        
-	opt = 0;
-        while opt != 6 do
-          puts "Enter \n 1.Deposit \n 2.Withdraw \n 3.Money Transfer \n 4.Transaction history \n 5.Check balance \n 6.Logout"
-          opt = gets.chop.to_i
-          case opt
-          when 1, 2, 3
-            puts 'Enter amount'
-            amount = gets.chop.to_f
-            if amount <= 0.0
-              puts 'enter valid amount'
-            else
-            case opt
-            when 1
-              deposit(user_id , amount , transaction_history)
-            when 2
-              withdraw(user_id , amount , transaction_history)
-            when 3
-              puts "enter receiver id"
-              receiver_account = gets.chop
-              receiver_id = user_information[:"#{receiver_account}"]
-              money_transfer(user_id , receiver_id , amount , transaction_history)
-            end
-            end
-          when 4
-            puts 'starting date(yy-mm-dd)'
-            start_date = gets.chop
-            puts 'ending date(yy-mm-dd)'
-            end_date = gets.chop
-            transaction_info(transaction_history , user_id , start_date , end_date)
-          when 5
-            check_balance(user_id)
-          end
-        end 
+def operations(user_information, user_info, transaction_history)
+  perform_io('welcome')
+  transaction_history[:user_info] = []	        
+  opt = 0
+  while opt != 6 do
+    opt = perform_io("1.Deposit\n2.Withdraw\n3.Money Transfer\n4.Transaction history\n5.Check balance\n6.Logout") { gets.chop.to_i }
+    case opt
+    when 1, 2, 3
+    	amount = perform_io('Enter amount') { gets.chop.to_f }
+    	next perform_io('enter valid amount') if amount <= 0.0
+      case opt
+      when 1
+        deposit(user_info, amount, transaction_history)
+      when 2
+        withdraw(user_info, amount, transaction_history)
+      when 3
+        receiver_account = perform_io('enter receiver id') { gets.chop }
+        receiver_info = user_information[receiver_account.to_sym]
+        money_transfer(user_info, receiver_info, amount, transaction_history)
       end
-    when 2
-      puts "REGISTER: \n enter email (as username)"
-      user_name = gets.chop
-      if user_name == ''
-        puts 'enter valid username'
-i      else
-      puts 'enter password'
-      pass_word = gets.chop
-        if pass_word == ''
-          puts 'enter valid password'
-        else
-          puts 'user is added' if new_user(user_information , user_name , pass_word)
-        end
-      end
+    when 4
+      start_date = perform_io('starting date(yy-mm-dd)') { gets.chop }
+      end_date = perform_io('ending date(yy-mm-dd)') { gets.chop }
+      perform_io('Transaction History')
+      transaction_info(transaction_history, user_info, start_date, end_date)
+    when 5
+      check_balance(user_info)
     end
   end
 end
 
-banking_options(user_information , transaction_history)
+def banking_options(user_information, transaction_history)
+  iterator = 0
+  while iterator != 3 do
+    iterator = perform_io("1.Login\n2.Register\n3.exit") { gets.chop.to_i }
+    case iterator
+    when 1
+    	user_name = perform_io("LOGIN:\nenter username") { gets.chop }
+    	user_info = login(user_information[user_name.to_sym])
+    	operations(user_information, user_info, transaction_history) if user_info.class.equal?(Hash)
+    when 2
+    	user_name = perform_io("REGISTER:\nenter username") { gets.chop }
+			break perform_io('User already exist') if user_information[user_name.to_sym]
+    	break perform_io('enter valid username') if /^[a-zA-Z\d]+\Z/.match(user_name).nil?
+    	pass_word = perform_io('enter password') { gets.chop }
+    	break perform_io('enter valid password') if /^[a-zA-Z\d]+\Z/.match(pass_word).nil?
+    	perform_io('user is added') if new_user(user_information, user_name, pass_word)
+    end
+  end
+end
+
+banking_options(user_information, transaction_history)
