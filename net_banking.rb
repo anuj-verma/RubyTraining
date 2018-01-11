@@ -6,7 +6,7 @@ require 'io/console'
 def read_input(command, type)
   puts command
   @entered_string = yield
-  while valid?(@entered_string, type) == false 
+  while !valid?(@entered_string, type) 
     puts command
     @entered_string = yield
   end
