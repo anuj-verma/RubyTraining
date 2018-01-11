@@ -256,17 +256,17 @@ def validate_name(name)
    if (/\A[a-zA-Z]+ [a-zA-Z]+ [a-zA-Z]/).match(name)
     	return 'true'
    else
-    	'false'
+    	return 'false'
    end
 end
 
-validate_phone_no('1234569871')
+
   
  def validate_phone_no(name)
    if (/^[0-9]{10}$/).match(name)
-      puts 'true'
+      return 'true'
     else
-      puts 'false'
+      return 'false'
     end
  end
 
@@ -280,13 +280,15 @@ def registration
 	phone_no = gets
 	bool_value_phono = validate_phone_no(phone_no)
 	bool_value = validate_name(username)
-	puts "#{bool_value}"
+	puts "name:#{bool_value}"
+	puts "phone:#{bool_value_phono}"
 	if bool_value == 'true' && bool_value_phono == 'true'
 
 		puts "Enter the password"
 		password = gets.chomp
 
 		userinfo[:name] = username
+		userinfo[:phoneno] = phone_no
 		userinfo[:userpassword] = password
 		userinfo[:accountnumber] = $initial_account_number
 		userinfo[:balance] = 0
