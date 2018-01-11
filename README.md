@@ -4,12 +4,14 @@
 
 * In your .vimrc file, add the below lines:
 
-* execute pathogen#infect()
-* set ts = 2
-* set sw = 2
-* set expandtab
-* syntax on
-* set nocompatible
-* filetype on
-* filetype indent on
-* filetype plugin on
+```
+execute pathogen#infect()
+set ts = 2
+set sw = 2
+set expandtab
+syntax on
+set nocompatible
+filetype on
+filetype indent on
+filetype plugin on
+```
