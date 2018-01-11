@@ -93,20 +93,49 @@ def transfer(user_login_id,transaction_details)
 	add_transaction_details(transaction_details,user_login_id,'Transfer',amount.to_i,user_hash[:balance],current_time)
 	menu_transaction(user_login_id,transaction_details)
 end
+def common_transaction(login_id , transaction_list , transaction_info)
+ 	current_date_time = Time.now
+ 	temp_hash = $userinfo[login_id]
+	puts "Enter the amount"
+	amount = gets
+	yield(amount,temp_hash|:balance|)
 
-def deposit(login_id,transaction_details)
-	current_time=Time.new
-	temp_hash = $userinfo[login_id]
+end
+
+def deposit(login_id , transaction_list , transaction_info)
+ 	common_trasaction(login_id , transaction_list , transaction_info) do|amount , balance|
+	balance = balance + amount.to_i
+	#puts "Final amount:#{balance}"
+	add_transaction_list(transaction_list,transaction_info,login_id,'Deposit',amount.to_i,temp_hash[:balance],current_date_time)
+	balance
+	end
+ end
+=begin	
+ 	current_date_time = Time.now
+ 	temp_hash = $userinfo[login_id]
 	puts "Enter the amount"
 	amount = gets
 	temp_hash[:balance] = temp_hash[:balance] + amount.to_i
 	puts "Final amount:#{temp_hash[:balance]}"
-	add_transaction_details(transaction_details,login_id,'Deposit',amount.to_i,temp_hash[:balance],current_time)
-	menu_transaction(login_id,transaction_details)
-end
+	add_transaction_list(transaction_list,transaction_info,login_id,'Deposit',amount.to_i,temp_hash[:balance],current_date_time)
+	transaction_menu(login_id,transaction_list,transaction_info)
 
-def withdraw(login_id,transaction_details)
-	current_time=Time.new
+=end
+
+def withdraw(login_id , transaction_list , transaction_info)
+	common_trasaction(login_id , transaction_list , transaction_info) do|amount , balance|
+	if amount.to_i < balance 
+		 balance = balance-amount.to_i 
+	else
+		 puts 'Insufficient balance'
+		 transaction_menu(login_id , transaction_list , transaction_info)
+	end
+	#puts "Final amount:#{balance}"
+	add_transaction_list(transaction_list ,transaction_info , login_id , 'withdraw', amount.to_i , temp_hash[:balance] , current_date_time)
+	balance
+	end
+end
+=begin	current_date_time = Time.now
 	temp_hash = $userinfo[login_id]
 	puts "Enter the amount"
 	amount = gets
@@ -114,12 +143,12 @@ def withdraw(login_id,transaction_details)
 		 temp_hash[:balance] = temp_hash[:balance]-amount.to_i 
 	else
 		 puts 'Insufficient balance'
-		 menu_transaction(login_id,transaction_details)
+		 transaction_menu(login_id,transaction_list)
 	end
 	puts "Final amount:#{temp_hash[:balance]}"
-	add_transaction_details(transaction_details , login_id , 'withdraw', amount.to_i , temp_hash[:balance] , current_time)
-	menu_transaction(login_id,transaction_details)
-end
+	add_transaction_list(transaction_list ,transaction_info , login_id , 'withdraw', amount.to_i , temp_hash[:balance] , current_date_time)
+	transaction_menu(login_id,transaction_list,transaction_info)
+=end
 
 def login_check
 	login_id=0
