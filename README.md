@@ -6,8 +6,9 @@
 
 ```
 execute pathogen#infect()
-set ts = 2
-set sw = 2
+set number
+set ts=2
+set sw=2
 set expandtab
 syntax on
 set nocompatible
