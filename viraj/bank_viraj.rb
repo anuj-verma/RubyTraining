@@ -14,13 +14,27 @@ transactions = {}
 #made global to conveniently check if a user is logged in or not
 $logged_in_user_id = false		#false if user not logged in
 
+def get_valid_num(message)
+	puts message
+	while true
+		amount = gets.chomp.to_i
+		return amount if amount > 0
+		puts "Invalid input"
+	end
+end
 
-def register(users_list, transactions)
+def get_valid_input(message, regex)
+	puts message
+	while true
+		input = gets.chomp.to_s
+		return input if input.match?(regex)
+		puts "Invalid input"
+	end
+end
+
+def register(users_list:, transactions:, name:, password:, phone:, email:)
 	#new user_id is generated using the lenght of the hash 'users_list'
 	#a different approach should be used to generate user_id if the function to delete a user is implemented
-
-	puts 'Enter your new password: '
-	password = gets.chomp.to_s
 
 	new_user_id = users_list.length + 1
 	new_user = {balance: 0, password: password}
@@ -32,10 +46,8 @@ def register(users_list, transactions)
 	puts "Registration successful. Your ID is #{$logged_in_user_id}."
 
 	$logged_in_user_id = new_user_id
-
 	true
 end
-
 
 def login(users_list)
 	user_id = get_valid_num("Enter User ID: ")
@@ -43,8 +55,7 @@ def login(users_list)
 		puts "User ID doesn't exist.\n"
 		return false
 	end
-	puts 'Enter your password: '
-	if gets.to_s.chomp == users_list[user_id][:password]
+	if get_valid_password("Enter password: ") == users_list[user_id][:password]
 		$logged_in_user_id = user_id
 		puts "User #{user_id} logged in."
 		true
@@ -54,35 +65,43 @@ def login(users_list)
 	end	
 end
 
+def save_transaction(transactions, user_id, type, amount, transfer_user_id, balance, transaction_time, action)
+		transactions[user_id] << {type: type, amount: amount, transfer_user_id: transfer_user_id, balance: balance, transaction_time: transaction_time, action: action}
+end
 
-def get_valid_num(message)
-	puts message
-	while true
-		amount = gets.to_i
-		return amount if amount > 0
-		puts "Invalid input"
+#works for 'deposit' and 'withdraw'
+def transact(user, transactions, amount)
+	if block_given?
+		transact_info = yield()
+		user[:balance] = transact_info[:balance].to_i	
+
+		save_transaction(transactions, $logged_in_user_id, transact_info[:type], amount, nil, user[:balance], Time.now, nil)
+
+		puts transact_info[:message]
+	else
+		puts "Pass proper block"
 	end
 end
 
 def deposit(users_list, transactions, amount)
-	users_list[$logged_in_user_id][:balance] += amount
-
-	new_tranasction = {type: "Deposit", amount: amount, balance: users_list[$logged_in_user_id][:balance], transaction_time: Time.now}
-	transactions[$logged_in_user_id].append(new_tranasction)
-
-	puts 'Deposit successful.'	
+	transact(users_list[$logged_in_user_id], transactions, amount) do 
+		{ balance: users_list[$logged_in_user_id][:balance] + amount,
+			type: "Deposit",
+			message: "Deposit successful" }
+	end
 end
 
 def withdraw(users_list, transactions, amount)
-	if users_list[$logged_in_user_id][:balance] >= amount
-		users_list[$logged_in_user_id][:balance] -= amount
-
-		new_tranasction = {type: "Withdraw", amount: amount, balance: users_list[$logged_in_user_id][:balance], transaction_time: Time.now}
-		transactions[$logged_in_user_id].append(new_tranasction)	
-		puts 'Withdrawal successful.'
-	else
-		puts "You do not have #{amount} rupees in your account."
-	end
+	transact(users_list[$logged_in_user_id], transactions, amount) do 
+		if users_list[$logged_in_user_id][:balance] < amount
+			puts "Insufficient balance"
+			return false
+		end
+		{ balance: users_list[$logged_in_user_id][:balance] - amount,
+			type: "Withdraw",
+			message: "Withdraw successful" }
+ 	end
+ 	true
 end
 
 def transfer(users_list, transactions, transfer_user_id, amount)
@@ -90,12 +109,9 @@ def transfer(users_list, transactions, transfer_user_id, amount)
 		users_list[$logged_in_user_id][:balance] -= amount
 		users_list[transfer_user_id][:balance] += amount
 
-		sender_tranasction = {type: "Transfer", amount: amount, transfer_user_id: transfer_user_id, balance: users_list[$logged_in_user_id][:balance], transaction_time: Time.now, action: "To"}
-		transactions[$logged_in_user_id].append(sender_tranasction)
+		save_transaction(transactions, $logged_in_user_id, "Transfer", amount, transfer_user_id, users_list[$logged_in_user_id][:balance], Time.now, "To")
 
-
-		receiver_tranasction = {type: "Transfer", amount: amount, transfer_user_id: $logged_in_user_id, balance: users_list[transfer_user_id][:balance], transaction_time: Time.now, action: "From"}
-		transactions[transfer_user_id].append(receiver_tranasction)	
+		save_transaction(transactions, transfer_user_id, "Transfer", amount, transfer_user_id, users_list[transfer_user_id][:balance], Time.now, "From")
 
 		puts "Transfer of #{amount} to User #{transfer_user_id} is successful."
 	else
@@ -103,11 +119,10 @@ def transfer(users_list, transactions, transfer_user_id, amount)
 	end
 end
 
-def transfer_dialog(users_list, transactions)
-	transfer_user_id = get_valid_num("Enter user ID to transfer money: ")
+def transfer_validate(users_list, transactions, transfer_user_id, amount)
 	if(transfer_user_id != $logged_in_user_id)					
 		if users_list[transfer_user_id]
-			transfer(users_list, transactions, transfer_user_id, get_valid_num("Enter amount: "))
+			transfer(users_list, transactions, transfer_user_id, amount)
 		else
 			puts 'The user ID you entered does not exist.'
 		end
@@ -119,7 +134,7 @@ end
 def show_history(user_transactions)
 	#WE GET:
 		#user_transactions = [{}, {}, {}]
-		#transaction = {type: 'deposit', amount: 100, transfer_user_id = 2, balance: 1000, time: Time}
+		#transaction = {type: 'transfer', amount: 100, transfer_user_id = 2, balance: 1000, time: Time}
 	puts "Transaction History:\n"
 	puts "_________________________________________________________________________________________"
 	puts "#\tType\t\tAmount    \t\tBalance \tTime"
@@ -129,15 +144,16 @@ def show_history(user_transactions)
 	end
 end
 
-
 def transactions_for_duration(user_transactions)
 	#error handling not done
-	puts "Enter start time: (format: '9 jan 2018 16:35:20')"
+	puts "Enter start time: (e.g: '9 jan 2018 16:35:20')"
 	start_time = Time.parse(gets).to_i
 
-	puts "Enter end time: (format: '9 jan 2018 16:35:20')"
+	puts "Enter end time: (e.g: '9 jan 2018 16:35:20')"
 	end_time = Time.parse(gets).to_i
 
+	puts "_________________________________________________________________________________________"
+	puts "#\tType\t\tAmount    \t\tBalance \tTime"
 	puts "_________________________________________________________________________________________"
 
 		user_transactions.each_with_index do |transaction, count|
@@ -151,7 +167,6 @@ def logout
 	$logged_in_user_id = false		#assign value to the global variable
 end
 
-
 #execution starts here:
 while true
 	puts "\n1. Login\n2. Register\n3. Exit"
@@ -162,28 +177,39 @@ while true
 		next unless login(users_list)
 	when 2
 		system "clear"
-		register(users_list, transactions)
+		register(users_list: users_list,
+		 transactions: transactions,
+		 name: get_valid_input("Enter name: (<first_name> <space> <last_name>)",/\A[a-zA-Z]+\s[a-zA-Z]+/), password: get_valid_input("Enter new password. (6 digit, Numbers, letters allowed)", /\A[a-zA-Z\d]{6}\z/), 
+		 phone: get_valid_input("Enter phone number: ", /\A[\d]{10}\z/), 
+		 email: get_valid_input("Enter email ID: ", /^[a-z][_a-z0-9]*@[a-z]+\.[a-z]+\z/))
 	when 3
 		exit
+	else
+		system "clear"
+		puts "Enter valid option."
+		next
 	end
 
 		#loops until user logs out
 		while true
-			puts "__________________________________"
-			puts "\n[Your Balance: #{users_list[$logged_in_user_id][:balance]}] [User ID: #{$logged_in_user_id}]"
-			puts "__________________________________"
+			puts "______________________________"
+			puts "\n[Balance: #{users_list[$logged_in_user_id][:balance]}] [User ID: #{$logged_in_user_id}]"
+			puts "______________________________"
 			puts "\n1. Deposit\n2. Withdraw\n3. Transfer\n4. Show history\n5. Find Transactions for a duration\n6. Logout\n7. Exit"
 
 			case gets.to_i
 				when 1
 					system "clear"
 					deposit(users_list, transactions, get_valid_num("Enter amount: "))
+					show_history(transactions[$logged_in_user_id])
 				when 2
 					system "clear"
-					withdraw(users_list, transactions, get_valid_num("Enter amount: "))
+					next unless withdraw(users_list, transactions, get_valid_num("Enter amount: "))
+					show_history(transactions[$logged_in_user_id])
 				when 3
 					system "clear"
-					transfer_dialog(users_list, transactions)
+					transfer_validate(users_list, transactions, get_valid_num("Enter user ID to transfer money"), get_valid_num("Enter amount"))
+					show_history(transactions[$logged_in_user_id])
 				when 4
 					system "clear"
 					show_history(transactions[$logged_in_user_id])
