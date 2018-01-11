@@ -17,17 +17,24 @@ $logged_in_user_id = false		#false if user not logged in
 def get_valid_num(message)
 	puts message
 	while true
-		amount = gets.to_i
+		amount = gets.chomp.to_i
 		return amount if amount > 0
 		puts "Invalid input"
 	end
 end
 
-def register(users_list, transactions)
+def get_valid_input(message, regex)
+	puts message
+	while true
+		input = gets.chomp.to_s
+		return input if input.match?(regex)
+		puts "Invalid input"
+	end
+end
+
+def register(users_list:, transactions:, name:, password:, phone:)
 	#new user_id is generated using the lenght of the hash 'users_list'
 	#a different approach should be used to generate user_id if the function to delete a user is implemented
-
-	password = get_valid_num("Enter new password. (Only numbers allowed)")
 
 	new_user_id = users_list.length + 1
 	new_user = {balance: 0, password: password}
@@ -48,7 +55,7 @@ def login(users_list)
 		puts "User ID doesn't exist.\n"
 		return false
 	end
-	if get_valid_num("Enter password: ") == users_list[user_id][:password]
+	if get_valid_password("Enter password: ") == users_list[user_id][:password]
 		$logged_in_user_id = user_id
 		puts "User #{user_id} logged in."
 		true
@@ -63,12 +70,12 @@ def save_transaction(transactions, user_id, type, amount, transfer_user_id, bala
 end
 
 #works for 'deposit' and 'withdraw'
-def transact(users_list, transactions, amount)
+def transact(user, transactions, amount)
 	if block_given?
-		transact_info = yield(amount)
-		users_list[$logged_in_user_id][:balance] = transact_info[:balance].to_i	
+		transact_info = yield()
+		user[:balance] = transact_info[:balance].to_i	
 
-		save_transaction(transactions, $logged_in_user_id, transact_info[:type], amount, nil, users_list[$logged_in_user_id][:balance], Time.now, nil)
+		save_transaction(transactions, $logged_in_user_id, transact_info[:type], amount, nil, user[:balance], Time.now, nil)
 
 		puts transact_info[:message]
 	else
@@ -77,7 +84,7 @@ def transact(users_list, transactions, amount)
 end
 
 def deposit(users_list, transactions, amount)
-	transact(users_list, transactions, amount) do |amount| 
+	transact(users_list[$logged_in_user_id], transactions, amount) do 
 		{ balance: users_list[$logged_in_user_id][:balance] + amount,
 			type: "Deposit",
 			message: "Deposit successful" }
@@ -85,7 +92,7 @@ def deposit(users_list, transactions, amount)
 end
 
 def withdraw(users_list, transactions, amount)
-	transact(users_list, transactions, amount) do |amount| 
+	transact(users_list[$logged_in_user_id], transactions, amount) do 
 		if users_list[$logged_in_user_id][:balance] < amount
 			puts "Insufficient balance"
 			return false
@@ -112,11 +119,10 @@ def transfer(users_list, transactions, transfer_user_id, amount)
 	end
 end
 
-def transfer_dialog(users_list, transactions)
-	transfer_user_id = get_valid_num("Enter user ID to transfer money: ")
+def transfer_validate(users_list, transactions, transfer_user_id, amount)
 	if(transfer_user_id != $logged_in_user_id)					
 		if users_list[transfer_user_id]
-			transfer(users_list, transactions, transfer_user_id, get_valid_num("Enter amount: "))
+			transfer(users_list, transactions, transfer_user_id, amount)
 		else
 			puts 'The user ID you entered does not exist.'
 		end
@@ -147,6 +153,8 @@ def transactions_for_duration(user_transactions)
 	end_time = Time.parse(gets).to_i
 
 	puts "_________________________________________________________________________________________"
+	puts "#\tType\t\tAmount    \t\tBalance \tTime"
+	puts "_________________________________________________________________________________________"
 
 		user_transactions.each_with_index do |transaction, count|
 			if transaction[:transaction_time].to_i >= start_time and transaction[:transaction_time].to_i <= end_time
@@ -169,7 +177,7 @@ while true
 		next unless login(users_list)
 	when 2
 		system "clear"
-		register(users_list, transactions)
+		register(users_list: users_list, transactions: transactions, name: get_valid_input("Enter name: (<first_name> <space> <last_name>)", /\A[a-zA-Z]+\s[a-zA-Z]+/), password: get_valid_input("Enter new password. (6 digit, Numbers, letters allowed)", /\A[a-zA-Z\d]{6}\z/), phone: get_valid_input("Enter phone number: ", /\A[\d]{10}\z/))
 	when 3
 		exit
 	else
@@ -196,7 +204,7 @@ while true
 					show_history(transactions[$logged_in_user_id])
 				when 3
 					system "clear"
-					transfer_dialog(users_list, transactions)
+					transfer_validate(users_list, transactions, get_valid_num("Enter user ID to transfer money"), get_valid_num("Enter amount"))
 					show_history(transactions[$logged_in_user_id])
 				when 4
 					system "clear"
