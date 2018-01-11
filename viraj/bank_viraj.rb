@@ -1,7 +1,4 @@
-#bank program (Before: 167 lines)
-
-#TODO:
-	#validate all input
+#bank program
 
 require "time"
 #each user is stored as a hash e.g. #user = {balance: 765, password: "asda"}
@@ -41,7 +38,7 @@ end
 
 
 def login(users_list)
-	user_id = get_int("Enter User ID: ")
+	user_id = get_valid_num("Enter User ID: ")
 	if !users_list[user_id]
 		puts "User ID doesn't exist.\n"
 		return false
@@ -58,7 +55,7 @@ def login(users_list)
 end
 
 
-def get_int(message)
+def get_valid_num(message)
 	puts message
 	while true
 		amount = gets.to_i
@@ -107,10 +104,10 @@ def transfer(users_list, transactions, transfer_user_id, amount)
 end
 
 def transfer_dialog(users_list, transactions)
-	transfer_user_id = get_int("Enter user ID to transfer money: ")
+	transfer_user_id = get_valid_num("Enter user ID to transfer money: ")
 	if(transfer_user_id != $logged_in_user_id)					
 		if users_list[transfer_user_id]
-			transfer(users_list, transactions, transfer_user_id, get_int("Enter amount: "))
+			transfer(users_list, transactions, transfer_user_id, get_valid_num("Enter amount: "))
 		else
 			puts 'The user ID you entered does not exist.'
 		end
@@ -180,10 +177,10 @@ while true
 			case gets.to_i
 				when 1
 					system "clear"
-					deposit(users_list, transactions, get_int("Enter amount: "))
+					deposit(users_list, transactions, get_valid_num("Enter amount: "))
 				when 2
 					system "clear"
-					withdraw(users_list, transactions, get_int("Enter amount: "))
+					withdraw(users_list, transactions, get_valid_num("Enter amount: "))
 				when 3
 					system "clear"
 					transfer_dialog(users_list, transactions)
