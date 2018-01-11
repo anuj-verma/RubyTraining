@@ -3,18 +3,57 @@ $user_records_hash = Hash.new
 $account_ID = 1200
 
 def validate_email(str)
-    flag = 0
-    while flag == 0
-	 if str.include? "@"
-	 	if str.include? ".com"
-	 	   flag = 1
-	 	end
-     else
-	 	puts "Enter a Valid Email Address"
-		str = gets.chomp
-	 end
+
+    if /\A\w+@{1}\w+\.com${1}/.match?(str)
+    	str
+    else
+    	puts "Please Enter a valid email ID..."
+    	email = gets.chomp
+    	validate_email(email)
     end
-     str
+end
+def validate_name(str)
+	if /\A[a-zA-Z]+[\s]{0,1}[a-zA-Z]*[\s]{0,1}[a-zA-Z]*[\s]{0}[0-9]{0}/.match(str)
+		return str
+	else
+		puts "Enter a valid Name please.."
+		name = gets.chomp
+		validate_name(name)
+	end
+end
+
+def cannot_be_empty
+	str = ""
+	while str.length < 3
+		puts "Should contain at least 3 characters. Please Enter Again"
+		str = gets.chomp
+	end
+	str
+end
+
+def validate_length()
+
+	str = ""
+    puts "Password Should Contain At Least 5 characters in it.."
+    while str.length < 5
+    	puts "Please Enter Again..."
+    	str = gets.chomp
+    end
+      return str.chomp
+end
+
+def validate_aid_pwd(input_aid,input_pwd)
+	if($user_records_hash[input_aid].nil?)
+		puts "Seems Like You Are Not a registered user.. please register Yourself First"
+        accept_info
+
+    elsif ($user_records_hash[input_aid][:password] != input_pwd)
+     	puts "Seems Like You Have Entered a Wrong Password.. Try Again..."
+     	accept_id_pwd
+    else
+     	puts "\nYou Are Successfully Logged In..\n"
+     	show_logged_in_menu(input_aid)
+    end
 end
 
 def accept_info
@@ -22,10 +61,8 @@ def accept_info
      hash = Hash.new
 
      puts "Enter Your Name: "
-     hash[:name] = gets.chomp
-     if hash[:name].length < 3
-     	hash[:name] = cannot_be_empty
-     end
+     name = gets.chomp
+     hash[:name] = validate_name(name)
      puts "Enter Your City: "
      hash[:city] = gets.chomp
         if hash[:city].length < 3
@@ -51,8 +88,9 @@ def accept_info
      hash[:password] = gets.chomp
      if hash[:password].length < 5
           str = validate_length()
+          hash[:password] = str
      end
-     hash[:password] = str     
+          
 
      hash[:account_balance] = 500
 
@@ -68,14 +106,6 @@ def accept_info
 #     puts "Details are as follows \n #{$user_records_hash}"
 end
 
-def cannot_be_empty
-	str = ""
-	while str.length < 3
-		puts "Should contain at least 3 characters. Please Enter Again"
-		str = gets.chomp
-	end
-	str
-end
 def accept_id_pwd
     
     puts "\nEnter Your Account ID: "
@@ -102,18 +132,7 @@ def show_basic_menu
     end
 end
 
-def validate_aid_pwd(input_aid,input_pwd)
-	if($user_records_hash[input_aid].nil?)
-		puts "Seems Like You Are Not registered user.. please register Yourself First"
-        accept_info
-     elsif ($user_records_hash[input_aid][:password] != input_pwd )
-     	puts "Seems Like You Have Entered a Wrong Password.. Try Again..."
-     	accept_id_pwd
-     else
-     	puts "\nYou Are Successfully Logged In..\n"
-     	show_logged_in_menu(input_aid)
-    end
-end
+
 
 def deposit_funds(acc_id, deposit_amt)
     
@@ -140,16 +159,7 @@ def transfer_funds(source_id,target_id,transfer_amt)
     show_logged_in_menu(source_id)
 end
 
-def validate_length()
 
-	str = ""
-    puts "Password Should Contain At Least 5 characters in it.."
-    while str.length < 5
-    	puts "Please Enter Again..."
-    	str = gets.chomp
-    end
-      return str
-end
 
 def show_logged_in_menu(input_aid)
 
