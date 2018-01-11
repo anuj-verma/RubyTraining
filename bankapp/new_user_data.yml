@@ -1,63 +1,58 @@
 ---
-:ram:
-  :name: ram
-  :email: ram@123
-  :balance: 13311
-  :password: ram@123
-  :transaction_history:
-  - You deposited amount:100 on 09/01/2018 14:50
-  - You withdrawn amount:55 on 09/01/2018 14:50
-  - You received from kam amount:1254 on 09/01/2018 14:52
-  - You received from aki amount:12011 on 09/01/2018 15:44
-  - You received from aki amount:1 on 09/01/2018 16:24
-  - You deposited amount:100 on 09/01/2018 17:36
-  - You withdrawn amount:100 on 09/01/2018 17:36
-:kam:
-  :name: kam
-  :email: kam@haram.com
-  :balance: 11301
-  :password: kam
-  :transaction_history:
-  - You deposited amount:12555 on 09/01/2018 14:52
-  - You transferred to ram amount:1254 on 09/01/2018 14:52
 :aki:
-  :name: akshay
-  :email: aki@mail.com
-  :balance: 201239
-  :password: aki
+  :name: aki
+  :email: aki
+  :balance: 12564.0
+  :password: '12345678'
   :transaction_history:
-  - You deposited amount:100 on 09/10/2017 15:44
-  - You withdrawn amount:50 on 09/11/2017 15:44
-  - You deposited amount:200000 on 09/12/2017 15:44
-  - You withdrawn amount:1542 on 01/01/2018 15:44
-  - You transferred to ram amount:12011 on 09/01/2018 15:44
-  - You transferred to ram amount:1 on 09/01/2018 16:24
-  - You received from Akhil amount:14523 on 09/01/2018 17:49
-  - You deposited amount:100 on 10/01/2018 13:25
-  - You received from newuser amount:120 on 10/01/2018 15:36
-:Akhil:
-  :name: Akil
-  :email: Akhil@mail.com
-  :balance: 229325
-  :password: abcd@123
+  - :msg: deposited
+    :amount: 100
+    :date_time: 2018-01-11 10:13:15.227996612 +05:30
+  - :msg: deposited
+    :amount: 125
+    :date_time: 2018-01-11 10:14:00.796600677 +05:30
+  - :msg: deposited
+    :amount: 1000
+    :date_time: 2018-01-11 10:14:06.833216407 +05:30
+  - :msg: withdrawn
+    :amount: 10
+    :date_time: 2018-01-11 10:32:33.167107392 +05:30
+  - :msg: deposited
+    :amount: 1254
+    :date_time: 2018-01-11 10:33:33.894188610 +05:30
+  - :msg: received from fid
+    :amount: 10000
+    :date_time: 2018-01-11 10:46:51.624401895 +05:30
+  - :msg: deposited
+    :amount: 100
+    :date_time: 2018-01-11 16:19:51.899638019 +05:30
+  - :msg: withdrawn
+    :amount: 0
+    :date_time: 2018-01-11 16:20:03.111811615 +05:30
+  - :msg: transferred to fid
+    :amount: 20
+    :date_time: 2018-01-11 16:20:29.586330056 +05:30
+  - :msg: received from fid
+    :amount: 15.0
+    :date_time: 2018-01-11 16:30:39.744787070 +05:30
+:fid:
+  :name: fid
+  :email: fid
+  :balance: 9971.0
+  :password: '12345678'
   :transaction_history:
-  - You deposited amount:258369 on 09/01/2018 17:49
-  - You withdrawn amount:14521 on 09/01/2018 17:49
-  - You transferred to aki amount:14523 on 09/01/2018 17:49
-:newuser:
-  :name: newuser
-  :email: newuser@mail.com
-  :balance: 280
-  :password: newuserisbest
-  :transaction_history:
-  - You deposited amount:100 on 10/01/2018 15:35
-  - You deposited amount:25845 on 10/01/2018 15:35
-  - You withdrawn amount:25545 on 10/01/2018 15:35
-  - You transferred to aki amount:120 on 10/01/2018 15:36
-:new:
-  :name: new
-  :email: new@123.com
-  :balance: 100
-  :password: newisbest
-  :transaction_history:
-  - You deposited amount:100 on 10/01/2018 16:55
+  - :msg: deposited
+    :amount: 20111
+    :date_time: 2018-01-11 10:45:44.131716535 +05:30
+  - :msg: withdrawn
+    :amount: 145
+    :date_time: 2018-01-11 10:45:57.097066112 +05:30
+  - :msg: transferred to aki
+    :amount: 10000
+    :date_time: 2018-01-11 10:46:51.624386599 +05:30
+  - :msg: received from aki
+    :amount: 20
+    :date_time: 2018-01-11 16:20:29.586343924 +05:30
+  - :msg: transferred to aki
+    :amount: 15.0
+    :date_time: 2018-01-11 16:30:39.744778648 +05:30
