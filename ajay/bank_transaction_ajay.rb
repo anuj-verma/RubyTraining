@@ -5,7 +5,40 @@ $userinfo = Hash.new
 $key="1"
 $initial_account_number=100
 
+def display_menu(login_id,transaction_list,transaction_info)
+	puts "\n\n1.Deposit\n2.Withdraw\n3.Transfer Money\n4.Transaction Details\n5.Log out"
+	puts "\n\n"
+	puts "Enter Your Choise"
+	choise = gets
+	case choise.to_i
+		when 1
+			deposit(login_id,transaction_list,transaction_info)
+		when 2
+			withdraw(login_id,transaction_list,transaction_info)
+		when 3
+			transfer(login_id,transaction_list,transaction_info)
+		when 4
+			puts "\n\n"
+			puts "1.All Transaction\n2.Trasaction(Based On Date)\n3.Back"
+			transaction_choise = gets.chomp
+			puts "\n\n"
+			case transaction_choise.to_i
+			when 1
+				transaction(login_id,transaction_list,transaction_info)
+			when 2
+				transaction_history(login_id,transaction_list,transaction_info)
+			when 3
+				transaction_menu(login_id,transaction_list,transaction_info)
+			end
+		when 5
+			check_exits_user
+	end	
+end
+
 def transaction_menu(login_id,transaction_list,transaction_info)
+	display_menu(login_id,transaction_list,transaction_info)
+end
+=begin
 	puts "\n\n1.Deposit\n2.Withdraw\n3.Transfer Money\n4.Transaction Details\n5.Log out"
 	choise = gets
 	case choise.to_i
@@ -31,7 +64,7 @@ def transaction_menu(login_id,transaction_list,transaction_info)
 		when 5
 			check_exits_user
 	end
-end
+=end
 
 def transaction_history(login_id , transaction_list , transaction_info)
 	puts "Enter start date"
@@ -122,7 +155,7 @@ def transfer(user_login_id , transaction_list , transaction_info)
 	transaction_menu(user_login_id,transaction_list,transaction_info)
 end
 
-def common_trasaction(login_id , transaction_list , transaction_info)
+def get_input(login_id , transaction_list , transaction_info)
 	current_date_time = Time.now
  	user_hash = $userinfo[login_id]
 	puts "Enter the amount"
@@ -137,7 +170,7 @@ def common_trasaction(login_id , transaction_list , transaction_info)
 end
 
 def deposit(login_id , transaction_list , transaction_info)
- 	common_trasaction(login_id , transaction_list , transaction_info) do|amount , balance , current_date_time|
+ 	get_input(login_id , transaction_list , transaction_info) do|amount , balance , current_date_time|
 	balance = balance + amount.to_i
 	#puts "Final amount:#{balance}"
 	add_transaction_list(transaction_list,transaction_info,login_id,'Deposit',amount.to_i,balance,current_date_time)
@@ -157,7 +190,7 @@ def deposit(login_id , transaction_list , transaction_info)
 =end
 
 def withdraw(login_id , transaction_list , transaction_info)
-	common_trasaction(login_id , transaction_list , transaction_info) do|amount , balance ,current_date_time|
+	get_input(login_id , transaction_list , transaction_info) do|amount , balance ,current_date_time|
 	if amount.to_i < balance 
 		 balance = balance-amount.to_i 
 	else
@@ -195,6 +228,9 @@ def login_check
 		puts "\n\n1.Debit\n2.Withdrowl\n3.Transfer Money\n4.Transaction Details\n5.Log out"
 		transaction_list = Hash.new
 		transaction_info=Array.new
+		display_menu(login_id,transaction_list,transaction_info)
+
+=begin
 		getinput = gets
 		case getinput.to_i
 			when 1
@@ -208,35 +244,65 @@ def login_check
 		end
 	else
 		puts "login fail"
-	end		
+=end		
+	end
 end
 
 def print_line
 	puts"---------------------------------------------------------------------"
 end
 
+def validate_name(name)
+   if (/\A[a-zA-Z]+ [a-zA-Z]+ [a-zA-Z]/).match(name)
+    	return 'true'
+   else
+    	'false'
+   end
+end
+
+validate_phone_no('1234569871')
+  
+ def validate_phone_no(name)
+   if (/^[0-9]{10}$/).match(name)
+      puts 'true'
+    else
+      puts 'false'
+    end
+ end
+
+
 def registration
 
 	userinfo = Hash.new
-	puts "Enter the user name"
+	puts "Enter the user name(First_name MiddleName LastName)"
 	username = gets.chomp
+	puts "Enter the phone number"
+	phone_no = gets
+	bool_value_phono = validate_phone_no(phone_no)
+	bool_value = validate_name(username)
+	puts "#{bool_value}"
+	if bool_value == 'true' && bool_value_phono == 'true'
 
-	puts "Enter the password"
-	password = gets.chomp
+		puts "Enter the password"
+		password = gets.chomp
 
-	userinfo[:name] = username
-	userinfo[:userpassword] = password
-	userinfo[:accountnumber] = $initial_account_number
-	userinfo[:balance] = 0
-	print_line
-	puts "Your login id is:#{$key}"
-	puts "your account no is:#{userinfo[:accountnumber]}"
-	print_line
+		userinfo[:name] = username
+		userinfo[:userpassword] = password
+		userinfo[:accountnumber] = $initial_account_number
+		userinfo[:balance] = 0
+		print_line
+		puts "Your login id is:#{$key}"
+		puts "your account no is:#{userinfo[:accountnumber]}"
+		print_line
   
-	$initial_account_number = $initial_account_number+1; 	
-	$userinfo[$key] = userinfo
-	$key = $key + 1.to_s
-	check_exit_user
+		$initial_account_number = $initial_account_number+1; 	
+		$userinfo[$key] = userinfo
+		$key = $key + 1.to_s
+		check_exits_user
+	else
+		puts "Invalid Name"
+		registration
+	end
 end
 
 
