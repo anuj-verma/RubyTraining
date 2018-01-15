@@ -1,0 +1,20 @@
+---
+- !ruby/object:Restraunt
+  name: Box8
+  menu:
+    :Rajma: 30.0
+    :VadPav: 50.0
+    :Dal: 20.0
+- !ruby/object:Restraunt
+  name: Locavore
+  menu:
+    :Dal: 10.0
+    :VadaPav: 30.0
+    :Sabji: 40.0
+- !ruby/object:Restraunt
+  name: Flavours
+  menu:
+    :Icecream: 10.0
+    :Sandwich: 20.0
+    :Burger: 30.0
+    :VadaPav: 30.0
