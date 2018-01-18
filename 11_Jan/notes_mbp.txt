@@ -1,0 +1,89 @@
+BLOCKS:-
+
+Ruby blocks are little anonymous functions that can be passed into methods.
+
+Blocks are enclosed in a do / end statement or between brackets {},
+and they can have multiple arguments. The argument names are defined between two pipe | characters.
+
+you need to use the yield keyword. When you use yield, the code inside the block will be executed.
+
+example:-
+
+	def print_once
+  		yield
+	end
+ 
+	print_once { puts "Block is being run" }
+
+Blocks can also be explicit instead of implicit. This means that you can name the block and pass it to another method or save it into a variable.
+
+Here is an example:
+
+def explicit_block(&block)
+  block.call # Same as yield
+end
+ 
+explicit_block { puts "Explicit block called" }
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+PROCS:- 
+
+Proc objects are blocks of code that have been bound to a set of local variables. Once bound, the code may be called in different contexts and still access those variables.
+
+to create a proc
+a = Proc.new { | | some statement }
+
+so a is basically and object of class Proc, and it has access to all variables of the scope where it was defined
+
+It cab be execited using a.call
+We can pass argumests, and do everything we can do with a block
+Extra thing is that it can be passsed as in argument to a method.
+
+
+def sample_method(number)
+	puts 'Method Starts Here'
+	number.call(4)
+	puts 'Method ends Here'
+end
+
+a = Proc.new { puts x }
+sample_method(a)
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+LAMBDAS
+
+there is no dedicated Lambda class.
+A lambda is just a special Proc object.
+If you take a look at the instance methods from Proc, you will notice there is a lambda? method. 
+
+The syntax for defining a Ruby lambda looks like this:
+say_something = -> { puts "This is a lambda" }
+
+Defining a lambda won’t run the code inside it, just like defining a method won’t run the method, you need to use the call method for that.
+
+times_two = ->(x) { x * 2 }
+times_two.call(10)
+*****
+If you pass the wrong number of arguments to a lambda, it will raise an exception, just like a regular method. But that’s not the case with procs, as demonstrated in the following example.
+******
+
+
+Another difference between procs and lambdas is how they react to a return statement. A lambda will return normally, like a regular method. But a proc will try to return from the current context.
+
+If you run the following code, you will notice how the proc raises a LocalJumpError exception. The reason is that you can’t return from the top-level context.
+
+Try this:
+# Should work
+my_lambda = -> { return 1 }
+puts "Lambda result: #{my_lambda.call}"
+ 
+# Should raise exception
+my_proc = Proc.new { return 1 }
+puts "Proc result: #{my_proc.call}"
+
+Here is a summary of how procs and lambdas are different:
+
+    Lambdas are defined with -> {} and procs with Proc.new {}.
+    Procs return from the current method, while lambdas return from the lambda itself.
+    Procs don’t care about the correct number of arguments, while lambdas will raise an exception.
