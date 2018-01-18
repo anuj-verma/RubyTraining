@@ -17,8 +17,8 @@ end
 def my_map(input_array)
 	if block_given?
 		for i in input_array
-			yield(i)
-		end
+			yield(i) if block_given
+?		end
 	else
 		p input_array
 	end
