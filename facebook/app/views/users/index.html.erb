@@ -1,0 +1,37 @@
+<html>
+<body>
+<center>
+<h3>List of all users<br>
+<%= format_time(Time.now) %>
+</h3></center>
+<br>
+<table align="center" border=1>
+<th>Name</th><th>Gender</th><th>Email</th><th>Date of birth</th>
+<% @users.each do |user| %>
+<tr>
+<td>
+	<%= user.name %>
+</td>
+<td>
+	<%= user.gender %>
+</td>
+<td>
+	<%= user.email %>
+</td>
+<td>
+	<%= format_time(user.date_of_birth) %>
+</td>
+<td>
+<%= link_to 'Delete', user, method: :delete %>
+</td>
+<td>
+<%= link_to 'Update', user, method: :edit %>
+</td>
+
+<tr>
+<% end %>
+
+</table>
+<center><h3><%= link_to 'Create New User', new_user_path %></h3></center>
+</body>
+</html>
