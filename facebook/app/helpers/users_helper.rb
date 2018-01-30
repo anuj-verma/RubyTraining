@@ -1,5 +1,5 @@
 module UsersHelper
 	def format_time date
-		date.strftime("%d-%m-%y")
+		date.strftime("%d-%m-%Y")
 	end
 end

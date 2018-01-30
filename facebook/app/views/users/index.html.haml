@@ -1,0 +1,39 @@
+!!!
+%html
+  %body
+    %center
+      %h3
+        List of all users
+        %br/
+        = format_time(Time.now)
+    %br/
+    %table{:align => "center", :border => "1", :cellpadding => "10"}
+      %th Name
+      %th Gender
+      %th Email
+      %th Date of birth
+      %th Delete
+      %th Edit
+      %th Address
+      %th View Posts
+      - @users.each do |user|
+        %tr
+          %td
+            = user.name
+          %td
+            = user.gender
+          %td
+            = user.email
+          %td
+            = format_time(user.date_of_birth)
+          %td
+            = link_to 'Delete User', user, method: :delete, data: { confirm: 'Are you sure?' }
+          %td
+            = link_to 'Update', edit_user_path(user)
+          %td
+            = link_to 'View Address', user_addresses_path(user)
+          %td
+            = link_to 'View all post'
+    %center
+      %h3
+        = link_to 'Create New User', new_user_path

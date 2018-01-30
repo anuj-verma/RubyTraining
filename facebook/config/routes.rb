@@ -6,8 +6,10 @@ Rails.application.routes.draw do
 end
 =end
 
-  resources :users
-  resources :post
+resources :users do
+  	  resources :addresses	
+	  resources :posts
+	end
   # get 'users/index'
 root 'users#index'
 end

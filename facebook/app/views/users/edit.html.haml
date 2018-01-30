@@ -1,0 +1,34 @@
+%h1 Edit User
+= form_with(model: @user) do |f|
+  = f.label :name
+  %br/
+  = f.text_field :name
+  = @user.errors.full_messages_for(:name) if @user.errors.messages[:name]
+  %br/
+  = f.label :gender
+  %br/
+  = f.text_field :gender
+  = @user.errors.full_messages_for(:gender) if @user.errors.messages[:gender]
+  %br/
+  = f.label :date_of_birth
+  %br/
+  = f.date_field :date_of_birth
+  = @user.errors.full_messages_for(:date_of_birth) if @user.errors.messages[:date_of_birth]
+  %br/
+  = f.label :email
+  %br/
+  = f.text_field :email
+  = @user.errors.full_messages_for(:email) if @user.errors.messages[:email]
+  %br/
+  = f.label :password
+  %br/
+  = f.password_field :password
+  = @user.errors.full_messages_for(:password) if @user.errors.messages[:password]
+  %br/
+  = f.label :password_confirmed, "Confirmation"
+  %br/
+  = f.password_field :password_confirmation
+  = @user.errors.full_messages_for(:password) if @user.errors.messages[:password]
+  %br/
+  = f.submit
+= link_to 'Back', users_path

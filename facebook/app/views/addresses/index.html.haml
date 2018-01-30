@@ -1,0 +1,33 @@
+!!!
+%html
+  %body
+    %center
+      %h3
+        Address of the user
+        %br/
+        = format_time(Time.now)
+    %br/
+    %h2
+      %center
+        - unless @address.nil?
+          Id : #{@address.user_id}
+          %br/
+          Name : #{@u.name}
+          %br/
+          City : #{@address.city}
+          %br/
+          State : #{@address.state}
+          %br/
+          Country : #{@address.country}
+          %br/
+          %br/
+          = link_to 'Edit Address', edit_user_address_path
+        - else
+          = 'Address does not exist for '
+          = @users.find_by(id: params[:user_id]).name
+          %br/
+          %br/
+          = link_to 'Add address', new_user_address_path(params[:user_id])
+        %br/
+        = link_to 'SHOW ALL USERS', users_path
+      %h2

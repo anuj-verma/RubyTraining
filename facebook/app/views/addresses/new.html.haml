@@ -1,0 +1,24 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Add address
+  %body
+    = form_for(@address, url: user_addresses_path(@user.id), method: :POST ) do |f|
+      = f.label :city
+      %br/
+      = f.text_field :city
+      = @user.errors.full_messages_for(:city) if @user.errors.messages[:city]
+      %br/
+      = f.label :state
+      %br/
+      = f.text_field :state
+      = @user.errors.full_messages_for(:state) if @user.errors.messages[:state]
+      %br/
+      = f.label :'country'
+      %br/
+      = f.text_field :country
+      = @user.errors.full_messages_for(:country) if @user.errors.messages[:country]
+      %br/
+      %br/
+      = f.submit
