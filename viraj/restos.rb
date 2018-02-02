@@ -7,7 +7,7 @@ class Resto
 
   def search_dishes(query)
     dishes.each do |dish|
-      if dish.name.casecmp(query.name).zero? && dish.price == query.price
+      if dish.name.casecmp(query.name).zero? && dish.price <= query.price
         return name
       end
     end

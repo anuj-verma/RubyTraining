@@ -5,8 +5,8 @@ class Shishya
 	end
 
 	def method_missing(m)  
-    puts "#{name} cannot #{m}"  
-  end 
+    puts "#{name} cannot #{m}"
+  end
 end
 
 class Guru
@@ -25,16 +25,15 @@ arjun = Shishya.new('Arjun')
 karna = Shishya.new('Karna')
 dronacharya = Guru.new
 
-dronacharya.ashirvad(arjun, 'fly')
-dronacharya.ashirvad(arjun, 'swim')
-dronacharya.shraap(arjun, 'fly')
+dronacharya.ashirvad(arjun, :fly)
+dronacharya.ashirvad(arjun, :swim)
+dronacharya.shraap(arjun, :fly)
 arjun.fly
 arjun.swim
 
-dronacharya.ashirvad(karna, 'run')
-dronacharya.ashirvad(karna, 'swim')
+dronacharya.ashirvad(karna, :run)
+dronacharya.ashirvad(karna, :swim)
 karna.swim
 karna.run
 
 karna.random_power
-
