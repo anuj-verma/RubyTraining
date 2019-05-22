@@ -89,6 +89,7 @@ Pinky:
 Added by anuj
 4.We learned about the ruby gemsets and their structure in detail.
 5.We learned about the version control system and out of them we learned about the git version control system.
+6.new changes
 
  
 Jyoti:
