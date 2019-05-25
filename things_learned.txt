@@ -1,23 +1,29 @@
 
-<<<<<<< HEAD
+
+
 
 
 1. This is the first thing i have learned
 2. This is the second thing i have learned
 
 
-=======
+
  This is sample change
 2. This is the second thing i have learned
 
 1. This is the first thing i have learned
+
+Anuj:
+1. This is the first thing i have learned
+2. This is the second thing i have learned
+
+
 Hello This is target change..
 Tanya:
 
 1. On the first day we learned about installation process of RVM.
 2. Then we learned about the installation of Ruby using RVM.
 3. We learned that ruby components can be only read using login shells, and hence we learned about more types of shell.
->>>>>>> 8ef8c53f9810ee28514d66c92e5faca498bf721d
 4. Login shells first read and execute commands from /etc/profile whereas a non login shell reads and executes commands from etc/bash/bash.rc. Non log in shells will source your .bashrc but not you profile.
 
 5. All ruby Libraries are relesed in form of gemsets.
@@ -33,12 +39,14 @@ Priyanka:
 gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
 \curl -sSL https://get.rvm.io | bash -s stable
 3.to install a ruby version type : rvm install rubyversionname in terminal
-4.gemset is a library for ruby,inside gems following components are present 1.code 2.Documentation 3.gemspec
+4.gem is a library for ruby,inside gems following components are present 1.code 2.Documentation 3.gemspec
 
-5.gemsetset : set of gems
-command to create gemsetset:rvm gemset create nameofgemset
-command to use gemsetset :rvm gemset use nameofgemset
-command to delete gemsetset:rvm grmset delete nameofgemset
+5.gemset : set of gems
+command to create gemset:rvm gemset create nameofgemset
+command to use gemset :rvm gemset use nameofgemset
+command to delete gemset:rvm grmset delete nameofgemset
+6.working of git
+
 
 Jyoti:
 1. I learned RVM yesterday
@@ -141,10 +149,14 @@ Raj:
 Jyoti:
 Hi how r u???
 
-<<<<<<< HEAD
-=======
+
+
 Suraj:
     
       This is morning commit just for practice...
->>>>>>> 8ef8c53f9810ee28514d66c92e5faca498bf721d
+
 something
+Suraj:
+    
+      This is morning commit just for practice...
+
